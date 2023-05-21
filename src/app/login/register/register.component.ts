@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit {
         this.loading = false;
         if (res.length === 1 && sendEmail) {
           let { email, _id } = res[0];
-          // this.sendEmail(email, _id.$oid)
+          this.sendEmail(email, _id.$oid)
           return;
         }
         if (res.length > 0) {

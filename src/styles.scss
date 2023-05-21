@@ -32,12 +32,16 @@ body {
   }
 }
 .text-pry-pink {
-  color: $pry-pink !important;
+  color: $pry-red !important;
 }
 .container-image img {
 	height: 300px;
     width: 100%;
 	object-fit: scale-down;
+}
+.btn-red {
+  background-color: $pry-red !important;
+  color: #dbdbdb;
 }
 
 
@@ -170,5 +174,5 @@ tr.example-element-row:not(.example-expanded-row):active {
   color: #4f4f4f;
 }
 .breadcrumb-link:hover {
-  color: $pry-pink;
+  color: $pry-red;
 }
