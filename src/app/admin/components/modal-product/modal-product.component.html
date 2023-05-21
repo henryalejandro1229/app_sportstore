@@ -1,0 +1,84 @@
+<main>
+    <header class="modal-header">
+        <div class="modal-title">
+            {{data.isNew ? 'Nuevo': 'Editar'}} producto
+        </div>
+
+        <button mat-icon-button mat-dialog-close tabindex="-1">
+            <mat-icon class="close-icon btn-close-modal">close</mat-icon>
+        </button>
+    </header>
+
+    <section class="modal-body">
+
+        <div class="subtitle">
+            <div>
+                Datos del producto
+            </div>
+            <div class="linear"></div>
+        </div>
+
+        <form [formGroup]="form">
+            <div class="row">
+                <mat-form-field class="col-xs-12" color="primary" appearance="outline">
+                    <mat-label>Nombre del producto</mat-label>
+                    <input matInput type="text" placeholder="Nombre del producto" formControlName="title" />
+                    <mat-error *ngIf="form.controls['title'].errors?.['required']">Nombre requerido</mat-error>
+                    <mat-error *ngIf="form.controls['title'].errors?.['pattern']">El nombre debe
+                        contener solo letras</mat-error>
+                </mat-form-field>
+                <div class="col-xs-12 mb-4" color="primary" appearance="outline">
+                    <label for="formFile" class="form-label">Imagen del producto</label>
+                    <div *ngIf="!data.isNew" class="col-xs-12 border d-flex justify-content-center mb-3">
+                        <img src="{{urlImage}}/{{imageName}}" class="img-fluid" alt="Imagen del producto">
+                    </div>
+                    <input class="form-control" #inputFile type="file" accept="image/*" (change)="seleccionarImagen($event)">
+                </div>
+                <mat-form-field class="col-xs-12" color="primary" appearance="outline">
+                    <mat-label>Descripción</mat-label>
+                    <input matInput type="text" placeholder="Descripción del producto"
+                        formControlName="description" />
+                        <mat-error *ngIf="form.controls['description'].errors?.['required']">Descripción requerida</mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-md-6" color="primary" appearance="outline">
+                    <mat-label>Precio</mat-label>
+                    <input matInput min="1" type="number" placeholder="Precio del producto" formControlName="precio" />
+                    <mat-error *ngIf="form.controls['precio'].errors?.['required']">Precio requerido</mat-error>
+                    <mat-error *ngIf="form.controls['precio'].errors?.['min']">El precio mínimo es $1</mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-md-6" color="primary" appearance="outline">
+                    <mat-label>Talla</mat-label>
+                    <mat-select formControlName="talla">
+                        <mat-option value="xl">Extra grande</mat-option>
+                        <mat-option value="l">Grande</mat-option>
+                        <mat-option value="m">Mediana</mat-option>
+                        <mat-option value="s">Chica</mat-option>
+                        <mat-option value="xs">Extra chica</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="col-md-12" color="primary" appearance="outline">
+                    <mat-label>Sexo</mat-label>
+                    <mat-select formControlName="categorySex">
+                        <mat-option value="woman">Dama</mat-option>
+                        <mat-option value="man">Caballero</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="form.controls['categorySex'].errors?.['required']">Campo requerido</mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-md-12" color="primary" appearance="outline">
+                    <mat-label>Categoría</mat-label>
+                    <mat-select formControlName="categoryID">
+                        <mat-option *ngFor="let cat of objCategories" [value]="cat._id.$oid">{{cat.name}} -
+                            {{getTypeSex(cat.categorySex)}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="form.controls['categoryID'].errors?.['required']">Categoría requerida</mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+    </section>
+
+    <section class="footer">
+        <button [disabled]="form.invalid || data.isNew && objImagen.nombreArchivo.length === 0" mat-raised-button class="k-btn-pry-pink" (click)="submit()">{{data.isNew ?
+            'Crear': 'Actualizar'}} producto</button>
+    </section>
+
+</main>
