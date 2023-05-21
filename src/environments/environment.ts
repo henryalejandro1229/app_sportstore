@@ -7,7 +7,7 @@ export const environment = {
   production: false,
   url: `app_sportstore_backend/api`,
   urlImg: `http://localhost/app_sportstore_backend/api/products/imageProducts/`,
-  urlEmail: `https://app-los-pajaritos-server-email-production.up.railway.app/app_sportstore_backend`,
+  urlEmail: `https://appsportstoreserveremail-production.up.railway.app//app_sportstore_backend`,
 };
 
 /*
