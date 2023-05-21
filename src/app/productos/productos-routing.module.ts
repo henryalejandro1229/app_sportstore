@@ -15,7 +15,7 @@ const routes: Routes = [
         component: ListCategoriesComponent,
       },
       {
-        path: 'category/:id',
+        path: 'list-products/category',
         data: { breadcrumb: 'Categoría' },
         component: ListProductsComponent,
       },

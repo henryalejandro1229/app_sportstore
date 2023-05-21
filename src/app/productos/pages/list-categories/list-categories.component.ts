@@ -47,6 +47,6 @@ export class ListCategoriesComponent implements OnInit {
   }
 
   verCategoria(category: CategoryModelo) {
-    this._router.navigate(['/home/list-categories/category', category._id.$oid]);
+    this._router.navigate(['/home/list-categories/list-products/category'], {queryParams: {id:category._id.$oid}});
   }
 }

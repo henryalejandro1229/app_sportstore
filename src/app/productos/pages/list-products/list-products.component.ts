@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./list-products.component.scss'],
 })
 export class ListProductsComponent implements OnInit {
+  urlImageBanner = '';
   urlImage = environment.urlImg;
   objCategory!: CategoryModelo;
   objProducts!: ProductoModelo[];
@@ -19,11 +20,15 @@ export class ListProductsComponent implements OnInit {
     private activatedRouter: ActivatedRoute,
     private _ps: ProductosService
   ) {
-    const idTrasladoInterno = this.activatedRouter.snapshot.paramMap.get('id');
-    if (idTrasladoInterno) this.consultaInfo(idTrasladoInterno);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.activatedRouter.queryParams.subscribe((res) => {
+      if (res) {
+        this.consultaInfo(res['id']);
+      }
+    });
+  }
 
   consultaInfo(id: string): void {
     combineLatest(
@@ -33,6 +38,7 @@ export class ListProductsComponent implements OnInit {
       (res) => {
         this.objCategory = res[0][0];
         this.objProducts = res[1];
+        this.urlImageBanner = this.objCategory.categorySex === 'man' ? 'sld2.png' : 'sld3.png';
       },
       (e) => {
         showNotifyError('Error consultar información', 'Intente mas tarde');

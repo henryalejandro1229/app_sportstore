@@ -72,7 +72,7 @@ export class NavbarComponent implements OnInit {
   }
 
   verCategoria(category: CategoryModelo) {
-    this.router.navigate(['/home/list-categories/category', category._id.$oid]);
+    this.router.navigate(['/home/list-categories/list-products/category'], {queryParams: {id:category._id.$oid}});
   }
 
   search(txtSearch: string) {
