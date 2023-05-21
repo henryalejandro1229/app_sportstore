@@ -1,7 +1,7 @@
 <div class="container-fluid p-4">
     <div class="py-4">
         <div class="d-flex justify-content-between"><b class="h3">Categorías disponibles</b>
-            <button mat-raised-button class="k-btn-pry-pink" (click)="openModal(true)">
+            <button mat-raised-button class="k-btn-pry-red" (click)="openModal(true)">
                 <mat-icon>add</mat-icon>
                 Agregar categoría
             </button>
@@ -30,7 +30,7 @@
             <ng-container matColumnDef="options">
                 <th mat-header-cell class="text-center" *matHeaderCellDef> Opciones </th>
                 <td mat-cell class="text-center" *matCellDef="let element">
-                    <button mat-icon-button color="accent" matTooltip="Editar categoría"
+                    <button mat-icon-button color="warn" matTooltip="Editar categoría"
                         (click)="openModal(false , element)">
                         <mat-icon>edit</mat-icon>
                     </button>

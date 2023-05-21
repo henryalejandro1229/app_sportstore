@@ -90,7 +90,7 @@ export function showModalConfirmation(title: string, message: string) {
     titleText: title,
     text: message,
     showCancelButton: true,
-    confirmButtonColor: '#e30052',
+    confirmButtonColor: '#DC3545',
     cancelButtonColor: '#808080',
     confirmButtonText: 'Confirmar',
     cancelButtonText: 'Cancelar',
