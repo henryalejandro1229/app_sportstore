@@ -1,14 +1,16 @@
-<app-navbar></app-navbar>
-<div class="div-crumb">
-    <div class="container py-2">
-        <breadcrumb #parent>
-            <span class="breadcrumb-app" *ngFor="let route of parent.breadcrumbs">
-                <span class="breadcrumb-item">
-                    <a [routerLink]="[route.url]" class="breadcrumb-link">{{ route.displayName }}</a>
+<main class="bg-lightgray">
+    <app-navbar></app-navbar>
+    <div class="div-crumb">
+        <div class="container py-2">
+            <breadcrumb #parent>
+                <span class="breadcrumb-app" *ngFor="let route of parent.breadcrumbs">
+                    <span class="breadcrumb-item">
+                        <a [routerLink]="[route.url]" class="breadcrumb-link">{{ route.displayName }}</a>
+                    </span>
                 </span>
-            </span>
-        </breadcrumb>
+            </breadcrumb>
+        </div>
     </div>
-</div>
-<router-outlet></router-outlet>
-<app-footer></app-footer>
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+</main>

@@ -1,1 +1,89 @@
-<p>carrito works!</p>
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-9">
+      <form [formGroup]="form">
+        <mat-card class="example-card">
+          <mat-card-title>Productos</mat-card-title>
+          <mat-divider></mat-divider>
+          <br>
+          <mat-card-content>
+            <!-- <div class="py-4" *ngIf="!objProductos || objProductos.length === 0">
+            <p class="h3">No se encontraron resultados de "{{txtSearch}}"</p>
+          </div> -->
+            <div>
+              <div class="col-xs-12">
+                <div class="row">
+                  <div class="col-md-2">
+                    <div class="container-image">
+                      <img src="">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <p class="h5 text-truncate">
+                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Assumenda ad impedit neque quod.
+                      Asperiores ut officia, ducimus aspernatur consequuntur necessitatibus non ex sequi eum repudiandae
+                      modi rem sint eaque impedit.
+                    </p>
+                    <p class="h7 fw-light">
+                      <small>Talla:
+                        <!-- <container-element [ngSwitch]="prod.talla">
+                          <b *ngSwitchCase="'xl'">Extra grande</b>
+                          <b *ngSwitchCase="'l'">Grande</b>
+                          <b *ngSwitchCase="'m'">Mediana</b>
+                          <b *ngSwitchCase="'s'">Chica</b>
+                          <b *ngSwitchCase="'xs'">Extra chica</b>
+                        </container-element> -->
+                      </small>
+                    </p>
+                    <div>
+                      <button mat-button>Eliminar</button>
+                      <button mat-button>Comprar ahora</button>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <mat-form-field>
+                      <mat-label>Cantidad</mat-label>
+                      <input matInput type="number" placeholder="Cantidad" formControlName="cantidad" />
+                      <mat-error *ngIf="form.controls['cantidad'].errors?.['required']">Cantidad requerida</mat-error>
+                      <mat-error *ngIf="form.controls['cantidad'].errors?.['min']">La cantidad mínima es 1</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-2">
+                    <p class="h4 text-right">
+                      <b class="txt-pink">
+                        <small>$</small>
+                        456<small>.00</small>
+                      </b>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </form>
+    </div>
+    <div class="col-md-3">
+      <mat-card class="example-card">
+        <mat-card-title>Resumen de compra</mat-card-title>
+        <mat-divider></mat-divider>
+        <br>
+        <mat-card-content>
+          <div class="d-flex justify-content-between">
+            <p>Productos (1)</p>
+            <p class="text-right">$ 1561.00</p>
+          </div>
+          <div class="d-flex justify-content-between">
+            <p>Envío</p>
+            <p class="text-right">Gratis</p>
+          </div>
+          <div class="d-flex justify-content-between h5">
+            <p>Total</p>
+            <p class="text-right">$ 1561.00</p>
+          </div>
+          <button class="k-btn-pry-red form-full" mat-button>Continuar compra</button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

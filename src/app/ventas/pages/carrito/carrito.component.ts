@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-carrito',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarritoComponent implements OnInit {
 
-  constructor() { }
+  form!: FormGroup;
+
+  constructor() {
+    this.form = new FormGroup({
+      cantidad: new FormControl('', [Validators.required, Validators.min(1)]),
+    });
+  }
 
   ngOnInit(): void {
   }
