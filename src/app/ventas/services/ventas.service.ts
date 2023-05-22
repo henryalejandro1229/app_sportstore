@@ -20,13 +20,20 @@ export class VentasService {
 
   setProductoCarrito(producto: ProductoCarritoModelo) {
     this.getProductosCarrito();
-    this.arrProductos.push(producto);
+    let productoEncontrado = this.arrProductos.find(
+      (prod) => prod._id.$oid === producto._id.$oid
+    );
+    productoEncontrado
+      ? (productoEncontrado.cantidad += producto.cantidad)
+      : this.arrProductos.push(producto);
     localStorage.setItem('productosCarrito', JSON.stringify(this.arrProductos));
   }
 
   deleteProductoCarrito(producto: ProductoCarritoModelo) {
     this.getProductosCarrito();
-    this.arrProductos = this.arrProductos.filter(prod => prod._id.$oid === producto._id.$oid);
+    this.arrProductos = this.arrProductos.filter(
+      (prod) => prod._id.$oid === producto._id.$oid
+    );
     localStorage.setItem('productosCarrito', JSON.stringify(this.arrProductos));
   }
 }
