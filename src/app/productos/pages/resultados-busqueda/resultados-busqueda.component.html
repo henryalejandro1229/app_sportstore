@@ -100,23 +100,23 @@
                 <div class="py-4" *ngIf="!objProductos || objProductos.length === 0">
                     <p class="h3">No se encontraron resultados de "{{txtSearch}}"</p>
                 </div>
-                <div class="col-md-12" *ngFor="let prod of objProductos">
+                <div class="col-md-12" *ngFor="let prod of objProductos" (click)="verProducto(prod)" matTooltip="Ver producto">
                     <div class="card hover-shadow shadow">
                         <div class="col-xs-12">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <div class="container-image">
                                         <img src="{{urlImage}}/{{prod.imageUrl}}">
                                     </div>
                                 </div>
-                                <div class="col-md-8 p-4 bg-light">
+                                <div class="col-md-7 p-4 bg-light">
                                     <div class="d-flex justify-content-between">
                                         <h5 class="text-truncate">
                                             <b>{{prod.title}}</b>
                                         </h5>
                                         <h6 class="fw-light">{{prod.categorySex === 'man' ? 'Caballero' : 'Dama'}}</h6>
                                     </div>
-                                    <p class="h6 fw-light text-truncate" [matTooltip]="prod.description">
+                                    <p class="h6 fw-light text-truncate">
                                         {{prod.description}}
                                     </p>
                                     <p class="h7 fw-light">

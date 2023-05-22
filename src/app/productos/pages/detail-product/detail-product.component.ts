@@ -40,6 +40,7 @@ export class DetailProductComponent implements OnInit {
     ).subscribe(
       (res) => {
         this.objProducto = res[0][0];
+        console.log(this.objProducto);
         this.objCategories = res[1];
         let resp = this.objCategories.find(cat => cat._id.$oid = this.objProducto.categoryID);
         this.category = resp? resp.name : '';

@@ -18,12 +18,12 @@
                             {{prod.description}}
                         </p>
                         <p class="h3 text-center">
-                            <b class="text-muted fst-normal text-pry-pink">${{prod.precio}}</b>
+                            <b class="text-muted fst-normal text-pry-pink">{{prod.precio | currency:'MXN':'symbol-narrow':'.2-2'}}</b>
                         </p>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <button class="btn btn-danger my-2">Comprar ahora</button>
-                        <button class="btn btn-outline-secondary my-2" (click)="verProducto(prod)">Ver detalle</button>
+                        <button class="btn btn-outline-dark my-2" (click)="verProducto(prod)">Ver detalle</button>
                     </div>
                 </div>
             </div>
