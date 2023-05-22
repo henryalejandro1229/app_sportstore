@@ -16,6 +16,7 @@ export interface ProductoModelo {
   talla: string;
   precio: number;
   codigo: string;
+  existencia: number;
 }
 
 export interface ImagenModelo {

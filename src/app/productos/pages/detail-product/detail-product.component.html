@@ -20,31 +20,36 @@
                 <b class="text-muted fst-normal txt-red">{{objProducto.precio |
                     currency:'MXN':'symbol-narrow':'.2-2'}}</b>
             </p>
-            <p>
-                <span class="fw-light">Talla: </span>
-                <b>
-                    <container-element [ngSwitch]="objProducto.talla">
-                        <b *ngSwitchCase="'xl'">Extra grande</b>
-                        <b *ngSwitchCase="'l'">Grande</b>
-                        <b *ngSwitchCase="'m'">Mediana</b>
-                        <b *ngSwitchCase="'s'">Chica</b>
-                        <b *ngSwitchCase="'xs'">Extra chica</b>
-                    </container-element>
-                </b>
-            </p>
-            <mat-form-field class="form-full mb-2">
-                <mat-label>Cantidad</mat-label>
-                <input matInput min="0" placeholder="Cantidad a comprar" type="number" />
-            </mat-form-field>
+            
+            <div class="d-flex justify-content-between">
+                <p>
+                    <span class="fw-light">Talla: </span>
+                    <b>
+                        <container-element [ngSwitch]="objProducto.talla">
+                            <b *ngSwitchCase="'xl'">Extra grande</b>
+                            <b *ngSwitchCase="'l'">Grande</b>
+                            <b *ngSwitchCase="'m'">Mediana</b>
+                            <b *ngSwitchCase="'s'">Chica</b>
+                            <b *ngSwitchCase="'xs'">Extra chica</b>
+                        </container-element>
+                    </b>
+                </p>
+                <p>Existencia: <b>{{objProducto.existencia}}</b></p>
+            </div>
+                    <mat-form-field class="form-full mb-2">
+                        <mat-label>Cantidad</mat-label>
+                        <input matInput min="1" [value]="cantidad" #cant (change)="setCantidad(cant)" value="1" placeholder="Cantidad a comprar"
+                            type="number" required />
+                    </mat-form-field>
             <div class="row">
                 <div class="col-md-6">
-                    <button mat-raised-button class="k-btn-pry-red form-full">
+                    <button mat-raised-button (click)="comprarAhora()" class="k-btn-pry-red form-full">
                         <mat-icon>payment</mat-icon>
                         Comprar ahora
                     </button>
                 </div>
                 <div class="col-md-6">
-                    <button mat-stroked-button class="k-btn-pry-dark form-full">
+                    <button mat-stroked-button (click)="agregarAlCarrito()" class="k-btn-pry-dark form-full">
                         <mat-icon>shopping_cart</mat-icon>
                         Agregar al carrito
                     </button>

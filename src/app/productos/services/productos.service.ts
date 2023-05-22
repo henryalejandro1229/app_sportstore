@@ -65,6 +65,12 @@ export class ProductosService {
     return this.http.get(`${environment.url}/products/getProducts.php`);
   }
 
+  private getRandomInt(min:number, max: number) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min);
+  }
+
   createProduct(formData: ProductoModelo, imageUrl: string): Observable<any> {
     let params = new HttpParams()
       .append('title', formData.title)
@@ -73,7 +79,8 @@ export class ProductosService {
       .append('categorySex', formData.categorySex)
       .append('precio', formData.precio)
       .append('talla', formData.talla)
-      .append('imageUrl', imageUrl);
+      .append('imageUrl', imageUrl)
+      .append('existencia', this.getRandomInt(200, 684));
     return this.http.get(`${environment.url}/products/createProduct.php`, {
       params,
     });
@@ -92,7 +99,8 @@ export class ProductosService {
       .append('categorySex', formData.categorySex)
       .append('precio', formData.precio)
       .append('talla', formData.talla)
-      .append('imageUrl', imageUrl);
+      .append('imageUrl', imageUrl)
+      .append('existencia', this.getRandomInt(200, 684));
     return this.http.get(`${environment.url}/products/updateProduct.php`, {
       params,
     });
