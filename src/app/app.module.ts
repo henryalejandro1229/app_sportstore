@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PagesModule } from './pages/pages.module';
 import { ProductosModule } from './productos/productos.module';
 import { BreadcrumbModule } from 'angular-crumbs';
+import { VentasModule } from './ventas/ventas.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { BreadcrumbModule } from 'angular-crumbs';
     AdminModule,
     LoginModule,
     PagesModule,
+    VentasModule,
     ProductosModule,
     BrowserAnimationsModule,
     BreadcrumbModule

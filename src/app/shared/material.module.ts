@@ -25,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgModule } from '@angular/core';
@@ -63,6 +64,7 @@ import { NgModule } from '@angular/core';
     MatTooltipModule,
     MatTreeModule,
     MatSlideToggleModule,
+    MatBadgeModule,
   ],
   exports: [
     MatAutocompleteModule,
@@ -94,6 +96,7 @@ import { NgModule } from '@angular/core';
     MatTooltipModule,
     MatTreeModule,
     MatSlideToggleModule,
+    MatBadgeModule,
   ],
   declarations: [],
 })

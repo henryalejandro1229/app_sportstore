@@ -3,8 +3,9 @@
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Toggle button -->
-    <button class="navbar-toggler" [matMenuTriggerFor]="matPryMenuPublic" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" [matMenuTriggerFor]="matPryMenuPublic" type="button" data-mdb-toggle="collapse"
+      data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation">
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #matPryMenuPublic="matMenu">
@@ -24,13 +25,15 @@
           MUJER
         </button>
         <mat-menu #matMenuMujerResp="matMenu">
-          <button *ngFor="let catWoman of categoriesWoman" (click)="verCategoria(catWoman)" mat-menu-item>{{catWoman.name}}</button>
+          <button *ngFor="let catWoman of categoriesWoman" (click)="verCategoria(catWoman)"
+            mat-menu-item>{{catWoman.name}}</button>
         </mat-menu>
         <button class="nav-link" mat-menu-item [matMenuTriggerFor]="matMenuHombreResp">
           HOMBRE
         </button>
         <mat-menu #matMenuHombreResp="matMenu">
-          <button *ngFor="let catMan of categoriesMan" (click)="verCategoria(catMan)" mat-menu-item>{{catMan.name}}</button>
+          <button *ngFor="let catMan of categoriesMan" (click)="verCategoria(catMan)"
+            mat-menu-item>{{catMan.name}}</button>
         </mat-menu>
         <button class="nav-link" mat-menu-item (click)="routerLink('/home/pedidos')">
           PEDIDOS
@@ -69,7 +72,8 @@
             <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
           </button>
           <mat-menu #matMenuMujer="matMenu">
-            <button *ngFor="let catWoman of categoriesWoman" (click)="verCategoria(catWoman)" mat-menu-item>{{catWoman.name}}</button>
+            <button *ngFor="let catWoman of categoriesWoman" (click)="verCategoria(catWoman)"
+              mat-menu-item>{{catWoman.name}}</button>
           </mat-menu>
         </li>
         <li class="nav-item mx-2">
@@ -78,7 +82,8 @@
             <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
           </button>
           <mat-menu #matMenuHombre="matMenu">
-            <button *ngFor="let catMan of categoriesMan" (click)="verCategoria(catMan)" mat-menu-item>{{catMan.name}}</button>
+            <button *ngFor="let catMan of categoriesMan" (click)="verCategoria(catMan)"
+              mat-menu-item>{{catMan.name}}</button>
           </mat-menu>
         </li>
         <li class="nav-item mx-2">
@@ -108,14 +113,22 @@
     <div class="d-flex align-items-center">
       <div class="d-flex div-search" *ngIf="isAuth && !isAdmin || !isAuth">
         <form class="d-flex input-group w-auto mx-2">
-          <input type="search" (keyup.enter)="search(inputSearch.value)" #inputSearch class="form-control input-search form-control-sm rounded" placeholder="Buscar" aria-label="Search"
+          <input type="search" (keyup.enter)="search(inputSearch.value)" #inputSearch
+            class="form-control input-search form-control-sm rounded" placeholder="Buscar" aria-label="Search"
             aria-describedby="search-addon" />
         </form>
         <button mat-mini-fab class="k-btn-pry-dark" (click)="search(inputSearch.value)" matTooltip="Buscar">
           <mat-icon>search</mat-icon>
         </button>
       </div>
-      <button (click)="routerLink('/home/login')" *ngIf="!isAuth" mat-button><mat-icon matSuffix>login</mat-icon> INGRESAR</button>
+
+      <button (click)="routerLink('/home/ventas/carrito')" mat-icon-button matBadge="16" matBadgeColor="warn"
+        matTooltip="Ver carrito" *ngIf="isAuth && !isAdmin || !isAuth" class="mr-1">
+        <mat-icon matSuffix>shopping_cart</mat-icon>
+      </button>
+
+      <button (click)="routerLink('/home/login')" *ngIf="!isAuth" mat-button><mat-icon matSuffix>login</mat-icon>
+        INGRESAR</button>
       <div class="dropdown" *ngIf="isAuth">
         <a class="dropdown-toggle d-flex align-items-center hidden-arrow" id="navbarDropdownMenuAvatar" role="button"
           data-mdb-toggle="dropdown" aria-expanded="false">
