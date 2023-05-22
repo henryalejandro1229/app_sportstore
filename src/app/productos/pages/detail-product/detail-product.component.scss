@@ -1,0 +1,10 @@
+@import "../../../../assets/styles/colores.scss";
+.txt-red {
+  color: $pry-red !important;
+}
+::ng-deep.mat-form-field-underline {
+  background-color: #b0bec5 !important;
+}
+::ng-deep .mat-form-field-label {
+  color: #b0bec5 !important;
+}

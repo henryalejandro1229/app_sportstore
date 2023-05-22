@@ -104,17 +104,17 @@
           <button class="nav-link" mat-button (click)="routerLink('/admin/mantenimiento')">SEGURIDAD</button>
         </li>
       </ul>
-      <div class="d-flex mx-4" *ngIf="isAuth && !isAdmin || !isAuth">
+    </div>
+    <div class="d-flex align-items-center">
+      <div class="d-flex div-search" *ngIf="isAuth && !isAdmin || !isAuth">
         <form class="d-flex input-group w-auto mx-2">
           <input type="search" (keyup.enter)="search(inputSearch.value)" #inputSearch class="form-control input-search form-control-sm rounded" placeholder="Buscar" aria-label="Search"
             aria-describedby="search-addon" />
         </form>
-        <button mat-mini-fab color="primary" (click)="search(inputSearch.value)" matTooltip="Buscar">
+        <button mat-mini-fab class="k-btn-pry-dark" (click)="search(inputSearch.value)" matTooltip="Buscar">
           <mat-icon>search</mat-icon>
         </button>
       </div>
-    </div>
-    <div class="d-flex align-items-center">
       <button (click)="routerLink('/home/login')" *ngIf="!isAuth" mat-button><mat-icon matSuffix>login</mat-icon> INGRESAR</button>
       <div class="dropdown" *ngIf="isAuth">
         <a class="dropdown-toggle d-flex align-items-center hidden-arrow" id="navbarDropdownMenuAvatar" role="button"

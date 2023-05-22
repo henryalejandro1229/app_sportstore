@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
   }
 
   viewListCategories(categorySex: string): void {
-    this._router.navigate(['/home/list-categories', categorySex]);
+    this._router.navigate(['/home/list-categories/category', categorySex]);
   }
 
   getCategories() {

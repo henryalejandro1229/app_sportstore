@@ -1,1 +1,38 @@
-<p>detail-product works!</p>
+<div class="container py-4">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="container-image">
+                <img src="{{urlImage}}/{{objProducto.imageUrl}}">
+            </div>
+        </div>
+        <div class="col-md-7 border card p-4">
+            <div class="d-flex justify-content-between">
+                <p class="fw-light">{{category}}</p>
+                <button mat-icon-button color="warn" matTooltip="Agregar a favoritos">
+                    <mat-icon>favorite_border</mat-icon>
+                </button>
+            </div>
+            <h1><b>{{objProducto.title | uppercase}}</b></h1>
+            <p class="h3">
+                <b class="text-muted fst-normal txt-red">$ {{objProducto.precio}}</b>
+            </p>
+            <p class="fw-light">Descripción del producto:</p>
+            <p class="h6">
+                {{objProducto.description}}
+            </p>
+            <mat-form-field color="accent" class="form-full">
+                <mat-label>Cantidad</mat-label>
+                <input matInput min="0" placeholder="Cantidad a agregar"
+                    type="number"/>
+            </mat-form-field>
+                <button mat-raised-button class="my-3" color="warn">
+                    <mat-icon>payment</mat-icon>
+                    Comprar ahora
+                </button>
+                <button mat-stroked-button class="k-btn-pry-dark">
+                    <mat-icon>shopping_cart</mat-icon>
+                    Agregar al carrito
+                </button>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductosService } from '../../services/productos.service';
 import { showNotifyError } from 'src/app/shared/functions/Utilities';
 import { CategoryModelo, ProductoModelo } from '../../models/productos.modelo';
@@ -18,7 +18,8 @@ export class ListProductsComponent implements OnInit {
   objProducts!: ProductoModelo[];
   constructor(
     private activatedRouter: ActivatedRoute,
-    private _ps: ProductosService
+    private _ps: ProductosService,
+    private router: Router
   ) {
   }
 
@@ -44,5 +45,9 @@ export class ListProductsComponent implements OnInit {
         showNotifyError('Error consultar información', 'Intente mas tarde');
       }
     );
+  }
+
+  verProducto(producto: ProductoModelo) {
+    this.router.navigate(['/home/list-categories/product-detail'], {queryParams: {ID : producto._id.$oid}});
   }
 }
