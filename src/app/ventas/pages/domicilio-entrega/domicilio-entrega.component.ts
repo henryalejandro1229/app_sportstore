@@ -10,7 +10,11 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { NuevaDireccionComponent } from '../../components/nueva-direccion/nueva-direccion.component';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { showNotifyError } from 'src/app/shared/functions/Utilities';
+import {
+  showModalConfirmation,
+  showNotifyError,
+  showNotifySuccess,
+} from 'src/app/shared/functions/Utilities';
 
 @Component({
   selector: 'app-domicilio-entrega',
@@ -28,10 +32,9 @@ export class DomicilioEntregaComponent implements OnInit {
     private _vs: VentasService,
     private router: Router,
     private matDialog: MatDialog,
-    private _auth: AuthService,
+    private _auth: AuthService
   ) {
-    // this.form = new FormGroup({});
-    // this.Productos = this._vs.arrProductos;
+    this.Productos = this._vs.arrProductos;
   }
 
   ngOnInit(): void {
@@ -43,6 +46,8 @@ export class DomicilioEntregaComponent implements OnInit {
     this._vs.getDirecciones(this._auth.token).subscribe(
       (res: DireccionModelo[]) => {
         this.direcciones = res;
+        if (this.direcciones.length > 0)
+          this.direccionID = this.direcciones[0]._id.$oid;
       },
       (e) => {
         showNotifyError('Error consultar las direcciones', 'Intente mas tarde');
@@ -65,7 +70,7 @@ export class DomicilioEntregaComponent implements OnInit {
     this.matDialog
       .open(NuevaDireccionComponent, {
         panelClass: 'sinpadding',
-        width: '600px',
+        width: '700px',
         height: 'auto',
         data: {
           isNew,
@@ -74,7 +79,29 @@ export class DomicilioEntregaComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((res) => {
-        // if (res) this.consultaInfo();
+        if (res) this.getDirecciones();
       });
+  }
+
+  eliminarDireccion(direccion: DireccionModelo) {
+    showModalConfirmation(
+      'Eliminar dirección',
+      '¿Seguro que deseas eliminar esta dirección?'
+    ).then((res) => {
+      if (res) {
+        this._vs.deleteDireccion(direccion._id.$oid).subscribe(
+          (res: any) => {
+            showNotifySuccess(
+              'Dirección eliminada',
+              'La dirección se eliminó correctamente'
+            );
+            this.getDirecciones();
+          },
+          (e) => {
+            showNotifyError('Error al actualizar', 'Intente mas tarde');
+          }
+        );
+      }
+    });
   }
 }
