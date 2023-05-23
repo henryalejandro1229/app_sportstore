@@ -22,14 +22,14 @@
           <button mat-menu-item (click)="routerLink('/home/preguntas-frecuentes')">PREGUNTAS FRECUENTES</button>
         </mat-menu>
         <button class="nav-link" mat-menu-item [matMenuTriggerFor]="matMenuMujerResp">
-          MUJER
+          DAMA
         </button>
         <mat-menu #matMenuMujerResp="matMenu">
           <button *ngFor="let catWoman of categoriesWoman" (click)="verCategoria(catWoman)"
             mat-menu-item>{{catWoman.name}}</button>
         </mat-menu>
         <button class="nav-link" mat-menu-item [matMenuTriggerFor]="matMenuHombreResp">
-          HOMBRE
+          CABALLERO
         </button>
         <mat-menu #matMenuHombreResp="matMenu">
           <button *ngFor="let catMan of categoriesMan" (click)="verCategoria(catMan)"
@@ -68,7 +68,7 @@
         </li>
         <li class="nav-item mx-2">
           <button class="nav-link" mat-button [matMenuTriggerFor]="matMenuMujer">
-            MUJER
+            DAMA
             <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
           </button>
           <mat-menu #matMenuMujer="matMenu">
@@ -78,7 +78,7 @@
         </li>
         <li class="nav-item mx-2">
           <button class="nav-link" mat-button [matMenuTriggerFor]="matMenuHombre">
-            HOMBRE
+            CABALLERO
             <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
           </button>
           <mat-menu #matMenuHombre="matMenu">
@@ -122,7 +122,7 @@
         </button>
       </div>
 
-      <button (click)="routerLink('/home/ventas/carrito')" mat-icon-button matBadge="16" matBadgeColor="warn"
+      <button (click)="routerLink('/home/ventas/carrito')" mat-icon-button [matBadge]="_vs.cantProductosCarrito" matBadgeColor="warn"
         matTooltip="Ver carrito" *ngIf="isAuth && !isAdmin || !isAuth" class="mr-1">
         <mat-icon matSuffix>shopping_cart</mat-icon>
       </button>

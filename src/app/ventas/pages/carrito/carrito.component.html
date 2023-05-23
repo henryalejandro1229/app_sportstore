@@ -4,55 +4,55 @@
       <form [formGroup]="form">
         <mat-card class="example-card">
           <mat-card-title>Productos</mat-card-title>
-          <mat-divider></mat-divider>
-          <br>
           <mat-card-content>
+
             <!-- <div class="py-4" *ngIf="!objProductos || objProductos.length === 0">
             <p class="h3">No se encontraron resultados de "{{txtSearch}}"</p>
           </div> -->
-            <div>
+            <div class="my-2" *ngFor="let prod of Productos">
+              <mat-divider></mat-divider>
+              <br>
               <div class="col-xs-12">
                 <div class="row">
                   <div class="col-md-2">
                     <div class="container-image">
-                      <img src="">
+                      <img src="{{urlImage}}/{{prod.imageUrl}}">
                     </div>
                   </div>
                   <div class="col-md-6">
                     <p class="h5 text-truncate">
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Assumenda ad impedit neque quod.
-                      Asperiores ut officia, ducimus aspernatur consequuntur necessitatibus non ex sequi eum repudiandae
-                      modi rem sint eaque impedit.
+                      {{prod.description}}
                     </p>
-                    <p class="h7 fw-light">
+                    <p class="h7">
                       <small>Talla:
-                        <!-- <container-element [ngSwitch]="prod.talla">
+                        <container-element [ngSwitch]="prod.talla">
                           <b *ngSwitchCase="'xl'">Extra grande</b>
                           <b *ngSwitchCase="'l'">Grande</b>
                           <b *ngSwitchCase="'m'">Mediana</b>
                           <b *ngSwitchCase="'s'">Chica</b>
                           <b *ngSwitchCase="'xs'">Extra chica</b>
-                        </container-element> -->
+                        </container-element>
                       </small>
                     </p>
-                    <div>
-                      <button mat-button>Eliminar</button>
-                      <button mat-button>Comprar ahora</button>
+                    <div class="mb-3">
+                      <button mat-stroked-button>Eliminar</button>
+                      <button mat-stroked-button class="mx-2">Comprar ahora</button>
                     </div>
                   </div>
                   <div class="col-md-2">
-                    <mat-form-field>
+                    <mat-form-field class="form-full">
                       <mat-label>Cantidad</mat-label>
-                      <input matInput type="number" placeholder="Cantidad" formControlName="cantidad" />
-                      <mat-error *ngIf="form.controls['cantidad'].errors?.['required']">Cantidad requerida</mat-error>
-                      <mat-error *ngIf="form.controls['cantidad'].errors?.['min']">La cantidad mínima es 1</mat-error>
+                      <input matInput type="number" [(ngModel)]="prod.cantidad" placeholder="Cantidad"
+                        [formControlName]="prod._id.$oid" />
+                      <!-- <mat-error *ngIf="form.controls['cantidad'].errors?.['required']">Cantidad requerida</mat-error>
+                      <mat-error *ngIf="form.controls['cantidad'].errors?.['min']">La cantidad mínima es 1</mat-error> -->
                     </mat-form-field>
+                    <p class="text-center">{{prod.existencia}} disponibles</p>
                   </div>
                   <div class="col-md-2">
                     <p class="h4 text-right">
-                      <b class="txt-pink">
-                        <small>$</small>
-                        456<small>.00</small>
+                      <b class="txt-red">
+                        {{prod.precio | currency:'MXN':'symbol-narrow':'.2-2'}}
                       </b>
                     </p>
                   </div>

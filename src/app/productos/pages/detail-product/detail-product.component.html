@@ -24,15 +24,13 @@
             <div class="d-flex justify-content-between">
                 <p>
                     <span class="fw-light">Talla: </span>
-                    <b>
-                        <container-element [ngSwitch]="objProducto.talla">
-                            <b *ngSwitchCase="'xl'">Extra grande</b>
-                            <b *ngSwitchCase="'l'">Grande</b>
-                            <b *ngSwitchCase="'m'">Mediana</b>
-                            <b *ngSwitchCase="'s'">Chica</b>
-                            <b *ngSwitchCase="'xs'">Extra chica</b>
-                        </container-element>
-                    </b>
+                    <container-element [ngSwitch]="objProducto.talla">
+                        <b *ngSwitchCase="'xl'">Extra grande</b>
+                        <b *ngSwitchCase="'l'">Grande</b>
+                        <b *ngSwitchCase="'m'">Mediana</b>
+                        <b *ngSwitchCase="'s'">Chica</b>
+                        <b *ngSwitchCase="'xs'">Extra chica</b>
+                    </container-element>
                 </p>
                 <p>Existencia: <b>{{objProducto.existencia}}</b></p>
             </div>

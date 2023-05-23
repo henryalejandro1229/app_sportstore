@@ -20,7 +20,7 @@ export class ProductoCarritoModelo {
     this.imageUrl = data.imageUrl;
     this.talla = data.talla;
     this.cantidad = data.cantidad;
-    this.existencia = 289;
+    this.existencia = data.existencia;
     this.precio = data.precio;
     this.codigo = data.codigo;
   }

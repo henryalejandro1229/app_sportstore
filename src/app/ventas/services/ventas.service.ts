@@ -6,7 +6,11 @@ import { ProductoCarritoModelo } from '../models/ventas.modelo';
 })
 export class VentasService {
   arrProductos: ProductoCarritoModelo[] = [];
-  constructor() {}
+  cantProductosCarrito: number = 0;
+  constructor() {
+    this.getProductosCarrito();
+    this.cantProductosCarrito = this.arrProductos.length;
+  }
 
   getProductosCarrito() {
     let productos = localStorage.getItem('productosCarrito')
@@ -23,9 +27,13 @@ export class VentasService {
     let productoEncontrado = this.arrProductos.find(
       (prod) => prod._id.$oid === producto._id.$oid
     );
-    productoEncontrado
-      ? (productoEncontrado.cantidad += producto.cantidad)
-      : this.arrProductos.push(producto);
+    if(productoEncontrado) {
+      productoEncontrado.cantidad += producto.cantidad;
+      productoEncontrado.existencia = producto.existencia;
+    } else {
+      this.arrProductos.push(producto);
+    }
+    this.cantProductosCarrito = this.arrProductos.length;
     localStorage.setItem('productosCarrito', JSON.stringify(this.arrProductos));
   }
 
@@ -34,6 +42,7 @@ export class VentasService {
     this.arrProductos = this.arrProductos.filter(
       (prod) => prod._id.$oid === producto._id.$oid
     );
+    this.cantProductosCarrito = this.arrProductos.length;
     localStorage.setItem('productosCarrito', JSON.stringify(this.arrProductos));
   }
 }

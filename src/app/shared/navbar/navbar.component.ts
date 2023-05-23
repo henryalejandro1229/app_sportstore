@@ -10,6 +10,7 @@ import {
 import { CategoryModelo } from 'src/app/productos/models/productos.modelo';
 import { ProductosService } from 'src/app/productos/services/productos.service';
 import { combineLatest } from 'rxjs';
+import { VentasService } from 'src/app/ventas/services/ventas.service';
 
 @Component({
   selector: 'app-navbar',
@@ -25,7 +26,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     private router: Router,
     private _auth: AuthService,
-    private _ps: ProductosService
+    private _ps: ProductosService,
+    public _vs: VentasService,
   ) {}
 
   ngOnInit(): void {
