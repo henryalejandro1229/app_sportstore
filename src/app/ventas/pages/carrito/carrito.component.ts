@@ -19,7 +19,7 @@ export class CarritoComponent implements OnInit {
   form!: FormGroup;
   Productos: ProductoCarritoModelo[] = [];
   urlImage = environment.urlImg;
-  altaCarrito!: AltaCarrito;
+  altaCarrito = new AltaCarrito({});
 
   constructor(private _vs: VentasService, private fb: FormBuilder) {
     this.form = new FormGroup({});
@@ -27,14 +27,26 @@ export class CarritoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.Productos.forEach(prod => {
-      this.form.addControl(prod._id.$oid, this.fb.control(new FormControl(prod.cantidad, [Validators.required, Validators.min(1)])))
-    })
+    this.Productos.forEach((prod) => {
+      this.form.addControl(
+        prod._id.$oid,
+        this.fb.control(
+          new FormControl(prod.cantidad, [
+            Validators.required,
+            Validators.min(1),
+          ])
+        )
+      );
+    });
+    this.calculaDatosCarrito();
   }
 
   setCantidad(input: any, producto: ProductoCarritoModelo) {
-    if(parseFloat(input.value) > producto.existencia) {
-      showNotifyWarning('', 'No se puede solicitar más cantidad de la existente');
+    if (parseFloat(input.value) > producto.existencia) {
+      showNotifyWarning(
+        '',
+        'No se puede solicitar más cantidad de la existente'
+      );
       input.value = producto.existencia;
       return;
     }
@@ -45,10 +57,19 @@ export class CarritoComponent implements OnInit {
     }
     producto.cantidad = parseFloat(input.value);
     this._vs.setCantidadProductoCarrito(producto);
+    this.calculaDatosCarrito();
   }
 
   eliminarProducto(producto: ProductoCarritoModelo) {
     this._vs.deleteProductoCarrito(producto);
     this.Productos = this._vs.arrProductos;
+    this.calculaDatosCarrito();
+  }
+
+  calculaDatosCarrito() {
+    this.altaCarrito.total = 0;
+    this.Productos.forEach(
+      (prod) => (this.altaCarrito.total += prod.cantidad * prod.precio)
+    );
   }
 }
