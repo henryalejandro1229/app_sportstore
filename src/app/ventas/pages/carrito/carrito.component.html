@@ -89,7 +89,7 @@
             <p>Total</p>
             <p class="text-right">{{altaCarrito.total | currency:'MXN':'symbol-narrow':'.2-2'}}</p>
           </div>
-          <button class="k-btn-pry-red form-full" [disabled]="altaCarrito.total === 0" mat-button>Continuar compra</button>
+          <button class="k-btn-pry-red form-full" (click)="continuarCompra()" [disabled]="altaCarrito.total === 0" mat-button>Continuar compra</button>
         </mat-card-content>
       </mat-card>
     </div>

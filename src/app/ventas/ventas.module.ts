@@ -4,13 +4,17 @@ import { CarritoComponent } from './pages/carrito/carrito.component';
 import { VentasComponent } from './ventas.component';
 import { VentasRoutingModule } from './ventas-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { DomicilioEntregaComponent } from './pages/domicilio-entrega/domicilio-entrega.component';
+import { ConfirmaPagoComponent } from './pages/confirma-pago/confirma-pago.component';
 
 
 
 @NgModule({
   declarations: [
     VentasComponent,
-    CarritoComponent
+    CarritoComponent,
+    DomicilioEntregaComponent,
+    ConfirmaPagoComponent
   ],
   imports: [
     CommonModule,

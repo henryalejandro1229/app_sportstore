@@ -84,4 +84,8 @@ export class CarritoComponent implements OnInit {
       queryParams: { ID: producto._id.$oid },
     });
   }
+
+  continuarCompra() {
+    this.router.navigate(['/home/ventas/domicilio-entrega']);
+  }
 }
