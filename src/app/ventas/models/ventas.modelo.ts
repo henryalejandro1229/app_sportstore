@@ -28,11 +28,20 @@ export class ProductoCarritoModelo {
   }
 }
 
-export interface AltaCarrito {
+export class AltaCarrito {
   _id: any;
   fechaVenta: Date;
   total: number;
   productos: ProductoCarritoModelo[];
   clienteID: string;
   direccionEntrega: any[];
+
+  constructor( data: any) {
+    this._id = data._id;
+    this.fechaVenta = data.fechaVenta;
+    this.total = data.total;
+    this.productos = data.productos;
+    this.clienteID = data.clienteID;
+    this.direccionEntrega = data.direccionEntrega;
+  }
 }

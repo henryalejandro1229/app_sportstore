@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { VentasService } from '../../services/ventas.service';
-import { ProductoCarritoModelo } from '../../models/ventas.modelo';
+import { AltaCarrito, ProductoCarritoModelo } from '../../models/ventas.modelo';
 import { environment } from 'src/environments/environment';
 import { showNotifyWarning } from 'src/app/shared/functions/Utilities';
 
@@ -19,6 +19,7 @@ export class CarritoComponent implements OnInit {
   form!: FormGroup;
   Productos: ProductoCarritoModelo[] = [];
   urlImage = environment.urlImg;
+  altaCarrito!: AltaCarrito;
 
   constructor(private _vs: VentasService, private fb: FormBuilder) {
     this.form = new FormGroup({});
