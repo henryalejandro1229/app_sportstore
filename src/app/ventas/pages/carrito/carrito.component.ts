@@ -9,6 +9,8 @@ import { VentasService } from '../../services/ventas.service';
 import { AltaCarrito, ProductoCarritoModelo } from '../../models/ventas.modelo';
 import { environment } from 'src/environments/environment';
 import { showNotifyWarning } from 'src/app/shared/functions/Utilities';
+import { ProductoModelo } from 'src/app/productos/models/productos.modelo';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carrito',
@@ -21,7 +23,11 @@ export class CarritoComponent implements OnInit {
   urlImage = environment.urlImg;
   altaCarrito = new AltaCarrito({});
 
-  constructor(private _vs: VentasService, private fb: FormBuilder) {
+  constructor(
+    private _vs: VentasService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {
     this.form = new FormGroup({});
     this.Productos = this._vs.arrProductos;
   }
@@ -71,5 +77,11 @@ export class CarritoComponent implements OnInit {
     this.Productos.forEach(
       (prod) => (this.altaCarrito.total += prod.cantidad * prod.precio)
     );
+  }
+
+  verProducto(producto: ProductoModelo) {
+    this.router.navigate(['/home/list-categories/product-detail'], {
+      queryParams: { ID: producto._id.$oid },
+    });
   }
 }
