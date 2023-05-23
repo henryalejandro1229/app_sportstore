@@ -6,6 +6,7 @@ import { VentasRoutingModule } from './ventas-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { DomicilioEntregaComponent } from './pages/domicilio-entrega/domicilio-entrega.component';
 import { ConfirmaPagoComponent } from './pages/confirma-pago/confirma-pago.component';
+import { NuevaDireccionComponent } from './components/nueva-direccion/nueva-direccion.component';
 
 
 
@@ -14,7 +15,8 @@ import { ConfirmaPagoComponent } from './pages/confirma-pago/confirma-pago.compo
     VentasComponent,
     CarritoComponent,
     DomicilioEntregaComponent,
-    ConfirmaPagoComponent
+    ConfirmaPagoComponent,
+    NuevaDireccionComponent
   ],
   imports: [
     CommonModule,
@@ -23,6 +25,6 @@ import { ConfirmaPagoComponent } from './pages/confirma-pago/confirma-pago.compo
   ],
   exports: [
     CarritoComponent
-  ]
+  ],
 })
 export class VentasModule { }

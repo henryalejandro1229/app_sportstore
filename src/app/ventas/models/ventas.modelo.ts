@@ -34,7 +34,7 @@ export class AltaCarrito {
   total: number;
   productos: ProductoCarritoModelo[];
   clienteID: string;
-  direccionEntrega: any[];
+  direccionEntrega: DireccionModelo;
 
   constructor( data: any) {
     this._id = data._id;
@@ -44,4 +44,16 @@ export class AltaCarrito {
     this.clienteID = data.clienteID;
     this.direccionEntrega = data.direccionEntrega;
   }
+}
+
+export interface DireccionModelo {
+  _id: any;
+  clienteID: string;
+  nombre: string;
+  estado: string;
+  municipio: string;
+  colonia: string;
+  calle: string;
+  telefono: string;
+  indicaciones: string;
 }

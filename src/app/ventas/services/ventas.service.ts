@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ProductoCarritoModelo } from '../models/ventas.modelo';
+import {
+  DireccionModelo,
+  ProductoCarritoModelo,
+} from '../models/ventas.modelo';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +13,7 @@ import { ProductoCarritoModelo } from '../models/ventas.modelo';
 export class VentasService {
   arrProductos: ProductoCarritoModelo[] = [];
   cantProductosCarrito: number = 0;
-  constructor() {
+  constructor(private readonly http: HttpClient) {
     this.getProductosCarrito();
     this.cantProductosCarrito = this.arrProductos.length;
   }
@@ -61,8 +67,49 @@ export class VentasService {
   }
 
   calculaSubtotales() {
-    this.arrProductos.map(prod => {
+    this.arrProductos.map((prod) => {
       prod.subtotal = prod.cantidad * prod.precio;
-    })
+    });
+  }
+
+  getDirecciones(clienteID: string): Observable<any> {
+    return this.http.get(`${environment.url}/sales/getDirecciones.php?clienteID=${clienteID}`);
+  }
+
+  createdireccion(formData: DireccionModelo): Observable<any> {
+    let params = new HttpParams()
+      .append('clienteID', formData.clienteID)
+      .append('nombre', formData.nombre)
+      .append('estado', formData.estado)
+      .append('municipio', formData.municipio)
+      .append('colonia', formData.colonia)
+      .append('calle', formData.calle)
+      .append('telefono', formData.telefono)
+      .append('indicaciones', formData.indicaciones);
+    return this.http.get(`${environment.url}/sales/createDireccion.php`, {
+      params,
+    });
+  }
+
+  updateDireccion(id: string, formData: DireccionModelo): Observable<any> {
+    let params = new HttpParams()
+      .append('id', id)
+      .append('clienteID', formData.clienteID)
+      .append('nombre', formData.nombre)
+      .append('estado', formData.estado)
+      .append('municipio', formData.municipio)
+      .append('colonia', formData.colonia)
+      .append('calle', formData.calle)
+      .append('telefono', formData.telefono)
+      .append('indicaciones', formData.indicaciones);
+    return this.http.get(`${environment.url}/sales/updateDireccion.php`, {
+      params,
+    });
+  }
+
+  deleteDireccion(id: string): Observable<any> {
+    return this.http.get(
+      `${environment.url}/sales/deleteDireccion.php?id=${id}`
+    );
   }
 }
