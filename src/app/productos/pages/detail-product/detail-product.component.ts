@@ -6,6 +6,7 @@ import { ProductosService } from '../../services/productos.service';
 import { combineLatest } from 'rxjs';
 import {
   showNotifyError,
+  showNotifySuccess,
   showNotifyWarning,
 } from 'src/app/shared/functions/Utilities';
 import { ProductoCarritoModelo } from 'src/app/ventas/models/ventas.modelo';
@@ -86,5 +87,6 @@ export class DetailProductComponent implements OnInit {
     this.setDatoscarrito();
     this.objCarritoProducto.cantidad = this.cantidad;
     this._vs.setProductoCarrito(this.objCarritoProducto);
+    showNotifySuccess('', 'Producto agregado al carrito');
   }
 }

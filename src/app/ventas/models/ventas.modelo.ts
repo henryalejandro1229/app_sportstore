@@ -10,6 +10,7 @@ export class ProductoCarritoModelo {
   existencia: number
   precio: number;
   codigo: string;
+  subtotal: number;
 
   constructor( data: any) {
     this._id = data._id;
@@ -23,5 +24,15 @@ export class ProductoCarritoModelo {
     this.existencia = data.existencia;
     this.precio = data.precio;
     this.codigo = data.codigo;
+    this.subtotal = data.subtotal;
   }
+}
+
+export interface AltaCarrito {
+  _id: any;
+  fechaVenta: Date;
+  total: number;
+  productos: ProductoCarritoModelo[];
+  clienteID: string;
+  direccionEntrega: any[];
 }

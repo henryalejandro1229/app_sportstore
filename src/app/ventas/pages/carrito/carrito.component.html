@@ -6,9 +6,19 @@
           <mat-card-title>Productos</mat-card-title>
           <mat-card-content>
 
-            <!-- <div class="py-4" *ngIf="!objProductos || objProductos.length === 0">
-            <p class="h3">No se encontraron resultados de "{{txtSearch}}"</p>
-          </div> -->
+            <div class="my-2" *ngIf="!Productos || Productos.length === 0">
+              <mat-divider></mat-divider>
+              <br>
+              <div class="d-flex justify-content-center">
+                <img
+                  src="https://img.freepik.com/vector-gratis/ilustracion-concepto-anadir-al-carro_114360-1435.jpg?w=826&t=st=1684813012~exp=1684813612~hmac=6f4104292783d5eb4e79c6e1a0980b42ab58521c849d7f88e26d8dc874064c84"
+                  height="300px">
+              </div>
+              <p class="h6 text-center">Su carrito de compras se encuentra vacío</p>
+              <div class="d-flex justify-content-center">
+                <a type="button" class="btn btn-outline-dark my-2" [routerLink]="['/home']">Descubrir productos</a>
+              </div>
+            </div>
             <div class="my-2" *ngFor="let prod of Productos">
               <mat-divider></mat-divider>
               <br>
@@ -19,7 +29,7 @@
                       <img src="{{urlImage}}/{{prod.imageUrl}}">
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-5">
                     <p class="h5 text-truncate">
                       {{prod.description}}
                     </p>
@@ -35,24 +45,22 @@
                       </small>
                     </p>
                     <div class="mb-3">
-                      <button mat-stroked-button>Eliminar</button>
+                      <button mat-stroked-button (click)="eliminarProducto(prod)">Eliminar</button>
                       <button mat-stroked-button class="mx-2">Comprar ahora</button>
                     </div>
                   </div>
                   <div class="col-md-2">
                     <mat-form-field class="form-full">
                       <mat-label>Cantidad</mat-label>
-                      <input matInput type="number" [(ngModel)]="prod.cantidad" placeholder="Cantidad"
-                        [formControlName]="prod._id.$oid" />
-                      <!-- <mat-error *ngIf="form.controls['cantidad'].errors?.['required']">Cantidad requerida</mat-error>
-                      <mat-error *ngIf="form.controls['cantidad'].errors?.['min']">La cantidad mínima es 1</mat-error> -->
+                      <input matInput type="number" [ngModel]="prod.cantidad" #quantity placeholder="Cantidad" (change)="setCantidad(quantity, prod)"
+                        [formControlName]="prod._id.$oid"/>
                     </mat-form-field>
                     <p class="text-center">{{prod.existencia}} disponibles</p>
                   </div>
-                  <div class="col-md-2">
+                  <div class="col-md-3">
                     <p class="h4 text-right">
                       <b class="txt-red">
-                        {{prod.precio | currency:'MXN':'symbol-narrow':'.2-2'}}
+                        {{prod.subtotal | currency:'MXN':'symbol-narrow':'.2-2'}}
                       </b>
                     </p>
                   </div>
