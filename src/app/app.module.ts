@@ -10,6 +10,7 @@ import { PagesModule } from './pages/pages.module';
 import { ProductosModule } from './productos/productos.module';
 import { BreadcrumbModule } from 'angular-crumbs';
 import { VentasModule } from './ventas/ventas.module';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { VentasModule } from './ventas/ventas.module';
     BrowserAnimationsModule,
     BreadcrumbModule
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
