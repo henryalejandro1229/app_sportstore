@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
+  AltaCarrito,
   DireccionModelo,
   ProductoCarritoModelo,
 } from '../models/ventas.modelo';
@@ -66,6 +67,12 @@ export class VentasService {
     localStorage.setItem('productosCarrito', JSON.stringify(this.arrProductos));
   }
 
+  cleanCarrito() {
+    this.arrProductos = [];
+    this.cantProductosCarrito = this.arrProductos.length;
+    localStorage.setItem('productosCarrito', JSON.stringify(this.arrProductos));
+  }
+
   calculaSubtotales() {
     this.arrProductos.map((prod) => {
       prod.subtotal = prod.cantidad * prod.precio;
@@ -111,5 +118,26 @@ export class VentasService {
     return this.http.get(
       `${environment.url}/sales/deleteDireccion.php?id=${id}`
     );
+  }
+
+  createSale(objVenta: AltaCarrito): Observable<any> {
+    let prod : any[] = JSON.parse(JSON.stringify(objVenta.productos));
+    prod = prod.map(p => {
+      delete p._id;
+      return p;
+    });
+
+    let dir : DireccionModelo = JSON.parse(JSON.stringify(objVenta.direccionEntrega));
+    delete dir._id;
+    
+    let params = new HttpParams()
+      .append('fechaVenta', String(new Date()))
+      .append('total', objVenta.total)
+      .append('productos', JSON.stringify(prod))
+      .append('clienteID', objVenta.clienteID)
+      .append('direccionEntrega', JSON.stringify(dir));
+    return this.http.get(`${environment.url}/sales/createSale.php`, {
+      params,
+    });
   }
 }

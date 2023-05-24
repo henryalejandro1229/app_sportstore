@@ -41,7 +41,7 @@
                     </mat-card-content>
                 </mat-card>
             </mat-radio-group>
-            <button mat-raised-button class="k-btn-pry-red">Continuar</button>
+            <button mat-raised-button (click)="confirmarCompra()" [disabled]="!direcciones || direcciones.length === 0" class="k-btn-pry-red">Continuar</button>
             <button mat-stroked-button class="mx-2" (click)="openModalDireccion(true)">Agregar dirección</button>
         </div>
         <div class="col-md-3">

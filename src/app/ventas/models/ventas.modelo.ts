@@ -1,20 +1,24 @@
 export class ProductoCarritoModelo {
   _id: any;
   categoryID: string;
+  productoID: string;
+  category: string;
   title: string;
   description: string;
   categorySex: string;
   imageUrl: string;
   talla: string;
   cantidad: number;
-  existencia: number
+  existencia: number;
   precio: number;
   codigo: string;
   subtotal: number;
 
-  constructor( data: any) {
+  constructor(data: any, categoria: string) {
     this._id = data._id;
     this.categoryID = data.categoryID;
+    this.productoID = data._id.$oid;
+    this.category = categoria;
     this.title = data.title;
     this.description = data.description;
     this.categorySex = data.categorySex;
@@ -36,7 +40,7 @@ export class AltaCarrito {
   clienteID: string;
   direccionEntrega: DireccionModelo;
 
-  constructor( data: any) {
+  constructor(data: any) {
     this._id = data._id;
     this.fechaVenta = data.fechaVenta;
     this.total = data.total;

@@ -32,7 +32,7 @@ export class DomicilioEntregaComponent implements OnInit {
     private _vs: VentasService,
     private router: Router,
     private matDialog: MatDialog,
-    private _auth: AuthService
+    private _auth: AuthService,
   ) {
     this.Productos = this._vs.arrProductos;
   }
@@ -99,6 +99,36 @@ export class DomicilioEntregaComponent implements OnInit {
           },
           (e) => {
             showNotifyError('Error al actualizar', 'Intente mas tarde');
+          }
+        );
+      }
+    });
+  }
+
+  confirmarCompra() {
+    const dir = this.direcciones.find(direc => direc._id.$oid === this.direccionID);
+    if(dir) {
+      this.altaCarrito.direccionEntrega = dir;
+    }
+    this.altaCarrito.clienteID = this._auth.token;
+    this.altaCarrito.productos = this.Productos;
+    showModalConfirmation(
+      'Confirmar compra',
+      'Para continuar, confirme la compra'
+    ).then((res) => {
+      if (res) {
+        this._vs.createSale(this.altaCarrito).subscribe(
+          (res: any) => {
+            showNotifySuccess(
+              'Compra realizada',
+              'Su compra se realizó correctamente'
+            );
+            this.getDirecciones();
+            this.router.navigate(['home']);
+            this._vs.cleanCarrito();
+          },
+          (e) => {
+            showNotifyError('Error al conectar con el servidor', 'Intente mas tarde');
           }
         );
       }

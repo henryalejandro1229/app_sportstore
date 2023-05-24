@@ -61,7 +61,7 @@ export class DetailProductComponent implements OnInit {
   }
 
   private setDatoscarrito() {
-    this.objCarritoProducto = new ProductoCarritoModelo(this.objProducto);
+    this.objCarritoProducto = new ProductoCarritoModelo(this.objProducto, this.category);
   }
 
   setCantidad(input: any) {
