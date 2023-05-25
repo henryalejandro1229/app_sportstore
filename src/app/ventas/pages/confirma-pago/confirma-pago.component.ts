@@ -68,7 +68,7 @@ export class ConfirmaPagoComponent implements OnInit {
   }
 
   cambiarDireccion() {
-
+    this.router.navigate(['home/ventas/domicilio-entrega']);
   }
 
 }
