@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class VentasService {
   arrProductos: ProductoCarritoModelo[] = [];
+  altaCarrito: AltaCarrito = new AltaCarrito({});
   cantProductosCarrito: number = 0;
   constructor(private readonly http: HttpClient) {
     this.getProductosCarrito();
@@ -28,6 +29,17 @@ export class VentasService {
       this.arrProductos = JSON.parse(productos);
     }
     this.calculaSubtotales();
+    this.getAltaCarrito();
+  }
+
+  getAltaCarrito() {
+    let altaCarrito = localStorage.getItem('altaCarrito')
+      ? localStorage.getItem('altaCarrito')
+      : '';
+    this.altaCarrito = new AltaCarrito({});
+    if (altaCarrito && altaCarrito?.length > 0) {
+      this.altaCarrito = JSON.parse(altaCarrito);
+    }
   }
 
   setProductoCarrito(producto: ProductoCarritoModelo) {
@@ -48,6 +60,12 @@ export class VentasService {
     this.calculaSubtotales();
     this.cantProductosCarrito = this.arrProductos.length;
     localStorage.setItem('productosCarrito', JSON.stringify(this.arrProductos));
+  }
+
+  setAltaCarrito(alta: AltaCarrito) {
+    this.getProductosCarrito();
+    this.altaCarrito = new AltaCarrito(alta);
+    localStorage.setItem('altaCarrito', JSON.stringify(this.altaCarrito));
   }
 
   setCantidadProductoCarrito(producto: ProductoCarritoModelo) {
@@ -78,6 +96,11 @@ export class VentasService {
     this.arrProductos = [];
     this.cantProductosCarrito = this.arrProductos.length;
     localStorage.setItem('productosCarrito', JSON.stringify(this.arrProductos));
+  }
+
+  cleanAltaCarrito() {
+    this.altaCarrito = new AltaCarrito({});
+    localStorage.setItem('altaCarrito', JSON.stringify(this.altaCarrito));
   }
 
   calculaSubtotales() {
