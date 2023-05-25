@@ -22,8 +22,8 @@ const routes: Routes = [
         component: DomicilioEntregaComponent,
       },
       {
-        path: 'confirma-pago',
-        data: { breadcrumb: 'Confirmar pago' },
+        path: 'confirmar-compra',
+        data: { breadcrumb: 'Confirmar compra' },
         component: ConfirmaPagoComponent,
       },
     ],

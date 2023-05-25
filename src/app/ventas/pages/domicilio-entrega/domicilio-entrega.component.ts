@@ -66,7 +66,7 @@ export class DomicilioEntregaComponent implements OnInit {
   }
 
   continuarCompra() {
-    this.router.navigate(['/home/ventas/domicilio-entrega']);
+    this.router.navigate(['/home/ventas/confirmar-compra']);
   }
 
   openModalDireccion(isNew: boolean, direccion?: DireccionModelo) {
