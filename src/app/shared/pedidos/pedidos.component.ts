@@ -28,4 +28,11 @@ export class PedidosComponent implements OnInit {
       }
     );
   }
+
+  getCantProductos(sale: AltaCarrito) {
+    if(!sale) return;
+    let cant = 0;
+    sale.productos.forEach(prod => cant += prod.cantidad);
+    return cant;
+  }
 }
