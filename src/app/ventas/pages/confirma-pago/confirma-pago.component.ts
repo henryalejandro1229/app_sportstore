@@ -50,6 +50,7 @@ export class ConfirmaPagoComponent implements OnInit {
             );
             this.router.navigate(['home']);
             this._vs.cleanCarrito();
+            this._vs.cleanAltaCarrito();
           },
           (e) => {
             showNotifyError('Error al conectar con el servidor', 'Intente mas tarde');
@@ -57,6 +58,13 @@ export class ConfirmaPagoComponent implements OnInit {
         );
       }
     });
+  }
+
+  getCantProductos(sale: AltaCarrito) {
+    if(!sale) return;
+    let cant = 0;
+    sale.productos.forEach(prod => cant += prod.cantidad);
+    return cant;
   }
 
   cambiarDireccion() {

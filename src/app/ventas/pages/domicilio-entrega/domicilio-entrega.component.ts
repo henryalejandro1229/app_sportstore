@@ -76,9 +76,12 @@ export class DomicilioEntregaComponent implements OnInit {
     this._ls.getUsuario(this._auth.token).subscribe((res: ClienteModelo[]) => {
       this.altaCarrito.nombreCliente = res[0].name;
       this.altaCarrito.emailCliente = res[0].email;
+      this._vs.setAltaCarrito(this.altaCarrito);
+      this.router.navigate(['/home/ventas/confirmar-compra']);
+    },
+    (e) => {
+      showNotifyError('Error consultar al servidor', 'Intente mas tarde');
     })
-    this._vs.setAltaCarrito(this.altaCarrito);
-    this.router.navigate(['/home/ventas/confirmar-compra']);
   }
 
   openModalDireccion(isNew: boolean, direccion?: DireccionModelo) {
