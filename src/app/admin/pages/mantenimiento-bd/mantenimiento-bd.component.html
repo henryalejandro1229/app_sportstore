@@ -20,10 +20,11 @@
                             </div>
                         </div>
                     </div>
-                    <button mat-button (click)="restoreDB()" class="btn btn-primary mt-3"><mat-icon>restore</mat-icon>
+                    <button mat-raised-button (click)="restoreDB()" class="k-btn-pry-red mt-3"><mat-icon>restore</mat-icon>
                         Restaurar base de datos</button>
                     <div class="py-4">
-                        <p>Copia de seguridad disponible: {{dumpDisp.date | date: 'dd/mm/yyyy hh:mm a' }}</p>
+                        <p *ngIf="dumpDisp">Copia de seguridad disponible: {{dumpDisp.date | date: 'dd/mm/yyyy hh:mm a' }}</p>
+                        <p *ngIf="!dumpDisp">No hay copia de seguridad disponible</p>
                         <p>Historial de restauraciones</p>
                         <mat-divider class="mb-4"></mat-divider>
                         <table mat-table [dataSource]="objRestores" class="shadow">
@@ -63,7 +64,7 @@
                             </div>
                         </div>
                     </div>
-                    <button mat-button (click)="createBackup()" class="btn btn-primary mt-3"><mat-icon>add</mat-icon> Crear nueva
+                    <button mat-raised-button (click)="createBackup()" class="k-btn-pry-red mt-3"><mat-icon>add</mat-icon> Crear nueva
                         copia de seguridad
                     </button>
                     <div class="py-4">
