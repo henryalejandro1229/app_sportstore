@@ -8,9 +8,10 @@ import {
 import { VentasService } from '../../services/ventas.service';
 import { AltaCarrito, ProductoCarritoModelo } from '../../models/ventas.modelo';
 import { environment } from 'src/environments/environment';
-import { showNotifyWarning } from 'src/app/shared/functions/Utilities';
+import { showModalConfirmation, showNotifyWarning } from 'src/app/shared/functions/Utilities';
 import { ProductoModelo } from 'src/app/productos/models/productos.modelo';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-carrito',
@@ -26,7 +27,8 @@ export class CarritoComponent implements OnInit {
   constructor(
     private _vs: VentasService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private _auth: AuthService
   ) {
     this.form = new FormGroup({});
     this.Productos = this._vs.arrProductos;
@@ -86,6 +88,19 @@ export class CarritoComponent implements OnInit {
   }
 
   continuarCompra() {
+    if(!this._auth.isAuth()) {
+      showModalConfirmation(
+        'Iniciar sesión',
+        'Para continuar, debe iniciar sesión',
+        'Iniciar sesión',
+        'Continuar en el carrito'
+      ).then((res) => {
+        if (res) {
+          this.router.navigate(['/home/login']);
+        }
+      });
+      return;
+    }
     this.router.navigate(['/home/ventas/domicilio-entrega']);
   }
 }

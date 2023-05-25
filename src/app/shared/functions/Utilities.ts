@@ -84,7 +84,7 @@ export function showSwalInfo(
   }).catch(swal.noop);
 }
 
-export function showModalConfirmation(title: string, message: string) {
+export function showModalConfirmation(title: string, message: string, confirmButtonText = 'Confirmar', cancelButtonText = 'Cancelar') {
   return swal({
     type: 'question',
     titleText: title,
@@ -92,7 +92,7 @@ export function showModalConfirmation(title: string, message: string) {
     showCancelButton: true,
     confirmButtonColor: '#DC3545',
     cancelButtonColor: '#808080',
-    confirmButtonText: 'Confirmar',
-    cancelButtonText: 'Cancelar',
+    confirmButtonText,
+    cancelButtonText,
   }).catch(swal.noop);
 }

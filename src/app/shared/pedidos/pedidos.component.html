@@ -1,6 +1,64 @@
-<div class="container justify-content-md-center">
+<!-- <div class="container justify-content-md-center">
     <div class="m-4 py-5">
         <p class="h4 text-center fw-bold">Mis pedidos</p>
     </div>
     <mat-divider></mat-divider>
+</div> -->
+
+<div class="container">
+    <div class="py-4">
+        <p class="h3">Mis compras</p>
+        <!-- <p class="h5 fw-light">Aqu</p> -->
+    </div>
+    <mat-divider></mat-divider>
+    <div class="py-4">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 pb-4">
+            <div class="col" *ngFor="let sale of objSales">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <!-- <div class="col-md-2">
+                            <div class="container-image">
+                                <img src="">
+                            </div>
+                        </div> -->
+                        <!-- <div class="col-md-5">
+                            <p class="h5 text-truncate cursor">
+                                {{sale.description}}
+                            </p>
+                            <p class="h7">
+                                <small>Talla:
+                                    <container-element [ngSwitch]="sale.talla">
+                                        <b *ngSwitchCase="'xl'">Extra grande</b>
+                                        <b *ngSwitchCase="'l'">Grande</b>
+                                        <b *ngSwitchCase="'m'">Mediana</b>
+                                        <b *ngSwitchCase="'s'">Chica</b>
+                                        <b *ngSwitchCase="'xs'">Extra chica</b>
+                                    </container-element>
+                                </small>
+                            </p>
+                        </div>
+                        <div class="col-md-2">
+                            <mat-form-field class="form-full">
+                                <mat-label>Cantidad</mat-label>
+                                <input matInput type="number" [ngModel]="sale.cantidad" #quantity placeholder="Cantidad"
+                                    (change)="setCantidad(quantity, sale)" [formControlName]="sale._id.$oid" />
+                            </mat-form-field>
+                            <p class="text-center">{{sale.existencia}} disponibles</p>
+                        </div> -->
+                        <div class="col-md-3">
+                            <p class="h4 text-right">
+                                <b class="txt-red">
+                                    {{sale.total | currency:'MXN':'symbol-narrow':'.2-2'}}
+                                </b>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="py-4" *ngIf="!objSales">
+        <p class="h3">No ha realizado ninguna compra</p>
+    </div>
 </div>

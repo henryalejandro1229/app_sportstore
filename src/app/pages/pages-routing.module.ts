@@ -64,7 +64,7 @@ const routes: Routes = [
       },
       {
         path: 'pedidos',
-        data: { breadcrumb: 'Mis pedidos' },
+        data: { breadcrumb: 'Mis compras' },
         component: PedidosComponent,
       },
       {

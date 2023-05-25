@@ -15,6 +15,8 @@ import {
   showNotifyError,
   showNotifySuccess,
 } from 'src/app/shared/functions/Utilities';
+import { LoginService } from 'src/app/login/services/login.service';
+import { ClienteModelo } from 'src/app/login/models/cliente.modelo';
 
 @Component({
   selector: 'app-domicilio-entrega',
@@ -33,6 +35,7 @@ export class DomicilioEntregaComponent implements OnInit {
     private router: Router,
     private matDialog: MatDialog,
     private _auth: AuthService,
+    private _ls: LoginService
   ) {
     this.Productos = this._vs.arrProductos;
   }
@@ -112,6 +115,12 @@ export class DomicilioEntregaComponent implements OnInit {
     }
     this.altaCarrito.clienteID = this._auth.token;
     this.altaCarrito.productos = this.Productos;
+
+    this._ls.getUsuario(this._auth.token).subscribe((res: ClienteModelo[]) => {
+      this.altaCarrito.nombreCliente = res[0].name;
+      this.altaCarrito.emailCliente = res[0].email;
+    })
+    
     showModalConfirmation(
       'Confirmar compra',
       'Para continuar, confirme la compra'

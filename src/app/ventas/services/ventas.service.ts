@@ -135,9 +135,15 @@ export class VentasService {
       .append('total', objVenta.total)
       .append('productos', JSON.stringify(prod))
       .append('clienteID', objVenta.clienteID)
+      .append('nombreCliente', objVenta.nombreCliente)
+      .append('emailCliente', objVenta.emailCliente)
       .append('direccionEntrega', JSON.stringify(dir));
     return this.http.get(`${environment.url}/sales/createSale.php`, {
       params,
     });
+  }
+
+  getSales(clienteID: string): Observable<any> {
+    return this.http.get(`${environment.url}/sales/getSales.php?clienteID=${clienteID}`);
   }
 }

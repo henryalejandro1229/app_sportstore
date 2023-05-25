@@ -38,6 +38,8 @@ export class AltaCarrito {
   total: number;
   productos: ProductoCarritoModelo[];
   clienteID: string;
+  nombreCliente: string;
+  emailCliente: string;
   direccionEntrega: DireccionModelo;
 
   constructor(data: any) {
@@ -46,6 +48,8 @@ export class AltaCarrito {
     this.total = data.total;
     this.productos = data.productos;
     this.clienteID = data.clienteID;
+    this.nombreCliente = data.nombreCliente;
+    this.emailCliente = data.emailCliente;
     this.direccionEntrega = data.direccionEntrega;
   }
 }
