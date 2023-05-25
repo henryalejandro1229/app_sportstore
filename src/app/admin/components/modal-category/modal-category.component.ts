@@ -135,7 +135,6 @@ export class ModalCategoryComponent implements OnInit {
   }
 
   uploadImage() {
-    console.log(this.objImagen);
     this._ps.uploadFile(this.objImagen).subscribe(
       (datos) => {},
       (e) => {

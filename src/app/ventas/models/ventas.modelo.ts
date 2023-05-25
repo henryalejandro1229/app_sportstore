@@ -1,3 +1,5 @@
+import { InventarioModelo } from "src/app/productos/models/productos.modelo";
+
 export class ProductoCarritoModelo {
   _id: any;
   categoryID: string;
@@ -14,7 +16,7 @@ export class ProductoCarritoModelo {
   codigo: string;
   subtotal: number;
 
-  constructor(data: any, categoria: string) {
+  constructor(data: any, categoria: string, objTalla: InventarioModelo) {
     this._id = data._id;
     this.categoryID = data.categoryID;
     this.productoID = data._id.$oid;
@@ -23,9 +25,9 @@ export class ProductoCarritoModelo {
     this.description = data.description;
     this.categorySex = data.categorySex;
     this.imageUrl = data.imageUrl;
-    this.talla = data.talla;
+    this.talla = objTalla.talla;
     this.cantidad = data.cantidad;
-    this.existencia = data.existencia;
+    this.existencia = objTalla.inventario;
     this.precio = data.precio;
     this.codigo = data.codigo;
     this.subtotal = data.subtotal;

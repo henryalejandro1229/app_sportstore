@@ -55,8 +55,9 @@
   color: #FFF !important;
 }
 
-.k-btn-pry-red:disabled {
+.k-btn-pry-red:disabled, .k-btn-pry-dark:disabled {
   background-color: #BDBDBD !important;
+  border: #BDBDBD solid 0.5px;
   box-shadow: none !important;
   cursor: not-allowed !important;
 }

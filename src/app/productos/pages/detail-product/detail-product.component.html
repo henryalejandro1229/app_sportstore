@@ -20,34 +20,40 @@
                 <b class="text-muted fst-normal txt-red">{{objProducto.precio |
                     currency:'MXN':'symbol-narrow':'.2-2'}}</b>
             </p>
-            
+
             <div class="d-flex justify-content-between">
-                <p>
-                    <span class="fw-light">Talla: </span>
-                    <container-element [ngSwitch]="objProducto.talla">
-                        <b *ngSwitchCase="'xl'">Extra grande</b>
-                        <b *ngSwitchCase="'l'">Grande</b>
-                        <b *ngSwitchCase="'m'">Mediana</b>
-                        <b *ngSwitchCase="'s'">Chica</b>
-                        <b *ngSwitchCase="'xs'">Extra chica</b>
-                    </container-element>
-                </p>
-                <p>Existencia: <b>{{objProducto.existencia}}</b></p>
+                <mat-form-field class="col-xs-12" color="primary" appearance="outline">
+                    <mat-label>Talla</mat-label>
+                    <mat-select [(ngModel)]="objTalla" [disabled]="!objTalla" (selectionChange)="setCantidad(cant)">
+                        <div *ngFor="let talla of objProducto.inventario">
+                            <mat-option *ngIf="talla.inventario > 0" [value]="talla">
+                                <container-element [ngSwitch]="talla.talla">
+                                    <span *ngSwitchCase="'xl'">Extra grande</span>
+                                    <span *ngSwitchCase="'l'">Grande</span>
+                                    <span *ngSwitchCase="'m'">Mediana</span>
+                                    <span *ngSwitchCase="'s'">Chica</span>
+                                    <span *ngSwitchCase="'xs'">Extra chica</span>
+                                </container-element>
+                            </mat-option>
+                        </div>
+                    </mat-select>
+                </mat-form-field>
+                <p>Existencia: <b>{{objTalla ? objTalla.inventario : 0}}</b></p>
             </div>
-                    <mat-form-field class="form-full mb-2">
-                        <mat-label>Cantidad</mat-label>
-                        <input matInput min="1" [value]="cantidad" #cant (change)="setCantidad(cant)" value="1" placeholder="Cantidad a comprar"
-                            type="number" required />
-                    </mat-form-field>
+            <mat-form-field class="form-full mb-2">
+                <mat-label>Cantidad</mat-label>
+                <input matInput min="1" [value]="cantidad" #cant [disabled]="!objTalla" (change)="setCantidad(cant)" value="1"
+                    placeholder="Cantidad a comprar" type="number" required />
+            </mat-form-field>
             <div class="row">
                 <div class="col-md-6">
-                    <button mat-raised-button (click)="comprarAhora()" class="k-btn-pry-red form-full">
+                    <button mat-raised-button (click)="comprarAhora()" [disabled]="!objTalla" class="k-btn-pry-red form-full">
                         <mat-icon>payment</mat-icon>
                         Comprar ahora
                     </button>
                 </div>
                 <div class="col-md-6">
-                    <button mat-stroked-button (click)="agregarAlCarrito()" class="k-btn-pry-dark form-full">
+                    <button mat-stroked-button (click)="agregarAlCarrito()" [disabled]="!objTalla" class="k-btn-pry-dark form-full">
                         <mat-icon>shopping_cart</mat-icon>
                         Agregar al carrito
                     </button>

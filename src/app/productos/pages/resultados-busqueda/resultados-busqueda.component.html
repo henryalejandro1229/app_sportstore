@@ -54,15 +54,15 @@
 
                 <mat-divider class="my-3"></mat-divider>
 
-                <div class="d-flex justify-content-between align-items-center">
+                <!-- <div class="d-flex justify-content-between align-items-center">
                     <h5 class="fw-light"><b>Filtrar por talla</b></h5>
                     <button class="col-2 bg-light mx-2" matTooltip="Limpiar" color="warn"
                         (click)="aplicaFiltros('tallaSelect')" mat-icon-button
                         *ngIf="tallaSelect && tallaSelect !== '0'">
                         <mat-icon>close</mat-icon>
                     </button>
-                </div>
-                <mat-radio-group [(ngModel)]="tallaSelect" (change)="aplicaFiltros()">
+                </div> -->
+                <!-- <mat-radio-group [(ngModel)]="tallaSelect" (change)="aplicaFiltros()">
                     <mat-radio-button class="d-block p-2" value="xl">
                         Extra grande
                     </mat-radio-button>
@@ -80,7 +80,7 @@
                     </mat-radio-button>
                 </mat-radio-group>
 
-                <mat-divider class="my-3"></mat-divider>
+                <mat-divider class="my-3"></mat-divider> -->
 
                 <div class="d-flex justify-content-between align-items-center">
                     <h5 class="fw-light"><b>Filtrar por categoría</b></h5>
@@ -120,15 +120,7 @@
                                         {{prod.description}}
                                     </p>
                                     <p class="h7 fw-light">
-                                        <small>Talla:
-                                            <!-- <b>{{prod.talla | uppercase}}</b> -->
-                                            <container-element [ngSwitch]="prod.talla">
-                                                <b *ngSwitchCase="'xl'">Extra grande</b>
-                                                <b *ngSwitchCase="'l'">Grande</b>
-                                                <b *ngSwitchCase="'m'">Mediana</b>
-                                                <b *ngSwitchCase="'s'">Chica</b>
-                                                <b *ngSwitchCase="'xs'">Extra chica</b>
-                                            </container-element>
+                                        <small>Talla: <b>varios</b>
                                         </small>
                                     </p>
                                     <p class="h6 text-truncate"><span class="fw-light">Categoría: </span>

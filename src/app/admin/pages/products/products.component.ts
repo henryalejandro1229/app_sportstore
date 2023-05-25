@@ -24,7 +24,6 @@ export class ProductsComponent implements OnInit {
     'description',
     'categoria',
     'categorySex',
-    'talla',
     'precio',
     'options',
   ];
@@ -72,7 +71,7 @@ export class ProductsComponent implements OnInit {
     this.matDialog
       .open(ModalProductComponent, {
         panelClass: 'sinpadding',
-        width: '600px',
+        width: '900px',
         height: 'auto',
         data: {
           isNew,

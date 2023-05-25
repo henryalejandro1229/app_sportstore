@@ -58,7 +58,6 @@ export class RegisterProcessComponent implements OnInit {
           return;
         }
         this.objCliente = res[0];
-        console.log(this.objCliente);
       },
       (e) => {
         this.loading = false;
@@ -93,7 +92,6 @@ export class RegisterProcessComponent implements OnInit {
   }
 
   validaPwds(): void {
-    console.log(this.form.value.password);
     if (this.form.value.password && this.form.value.password2) {
       this.pwdsValue = true;
       this.pwdsCoinciden =
@@ -102,6 +100,5 @@ export class RegisterProcessComponent implements OnInit {
     }
     this.pwdsCoinciden = false;
     this.pwdsValue = false;
-    console.log(this.pwdsCoinciden);
   }
 }

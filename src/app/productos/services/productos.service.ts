@@ -6,6 +6,7 @@ import {
   CategoryModelo,
   ImagenModelo,
   ProductoModelo,
+  InventarioModelo,
 } from '../models/productos.modelo';
 
 @Injectable({
@@ -65,20 +66,24 @@ export class ProductosService {
     return this.http.get(`${environment.url}/products/getProducts.php`);
   }
 
-  private getRandomInt(min:number, max: number) {
+  private getRandomInt(min: number, max: number) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min);
   }
 
-  createProduct(formData: ProductoModelo, imageUrl: string): Observable<any> {
+  createProduct(
+    formData: ProductoModelo,
+    imageUrl: string,
+    objTallas: InventarioModelo[]
+  ): Observable<any> {
     let params = new HttpParams()
       .append('title', formData.title)
       .append('description', formData.description)
       .append('categoryID', formData.categoryID)
       .append('categorySex', formData.categorySex)
       .append('precio', formData.precio)
-      .append('talla', formData.talla)
+      .append('inventario', JSON.stringify(objTallas))
       .append('imageUrl', imageUrl)
       .append('existencia', this.getRandomInt(200, 684));
     return this.http.get(`${environment.url}/products/createProduct.php`, {
@@ -89,7 +94,8 @@ export class ProductosService {
   updateProduct(
     id: string,
     formData: ProductoModelo,
-    imageUrl: string
+    imageUrl: string,
+    objTallas: InventarioModelo[]
   ): Observable<any> {
     let params = new HttpParams()
       .append('id', id)
@@ -98,7 +104,7 @@ export class ProductosService {
       .append('categoryID', formData.categoryID)
       .append('categorySex', formData.categorySex)
       .append('precio', formData.precio)
-      .append('talla', formData.talla)
+      .append('inventario', JSON.stringify(objTallas))
       .append('imageUrl', imageUrl)
       .append('existencia', this.getRandomInt(200, 684));
     return this.http.get(`${environment.url}/products/updateProduct.php`, {

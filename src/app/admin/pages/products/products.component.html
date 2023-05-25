@@ -27,10 +27,6 @@
                 <th mat-header-cell *matHeaderCellDef> Categoría </th>
                 <td mat-cell *matCellDef="let element"> {{getCategoria(element.categoryID)}} </td>
             </ng-container>
-            <ng-container matColumnDef="talla">
-                <th mat-header-cell *matHeaderCellDef> Talla </th>
-                <td mat-cell *matCellDef="let element"> {{getTalla(element.talla)}} </td>
-            </ng-container>
             <ng-container matColumnDef="categorySex">
                 <th mat-header-cell *matHeaderCellDef> Sexo </th>
                 <td mat-cell *matCellDef="let element"> {{getTypeSex(element.categorySex)}} </td>

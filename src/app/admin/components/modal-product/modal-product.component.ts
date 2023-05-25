@@ -1,10 +1,18 @@
-import { Component, OnInit, Inject, Optional, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Inject,
+  Optional,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {
   CategoryModelo,
   ProductoModelo,
   ImagenModelo,
+  InventarioModelo,
 } from 'src/app/productos/models/productos.modelo';
 import { ProductosService } from 'src/app/productos/services/productos.service';
 import {
@@ -30,6 +38,9 @@ export class ModalProductComponent implements OnInit {
     base64textString: '',
   };
   extPermitidas = ['jpg', 'jpeg', 'png'];
+  displayedColumns: string[] = ['talla', 'inventario'];
+  objProducts!: ProductoModelo[];
+  objTallas: InventarioModelo[] = [];
   @ViewChild('inputFile') inputFile!: ElementRef;
 
   constructor(
@@ -43,17 +54,22 @@ export class ModalProductComponent implements OnInit {
     }
   ) {
     this.form = new FormGroup({
-      title: new FormControl('', [Validators.required, Validators.pattern(/^[a-z\s\u00E0-\u00FC\u00f1]*$/i)]),
+      title: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[a-z\s\u00E0-\u00FC\u00f1]*$/i),
+      ]),
       description: new FormControl('', [Validators.required]),
       categorySex: new FormControl('', [Validators.required]),
       precio: new FormControl('', [Validators.required, Validators.min(1)]),
       categoryID: new FormControl('', [Validators.required]),
-      talla: new FormControl('', [Validators.required]),
     });
   }
 
   ngOnInit(): void {
     this.consultaInfo();
+    if (!this.data.objProduct) {
+      this.setDatosDefaultTalla();
+    }
     if (this.data.objProduct) {
       this.id = this.data.objProduct._id.$oid;
       this.form.controls['title'].setValue(this.data.objProduct.title);
@@ -66,10 +82,22 @@ export class ModalProductComponent implements OnInit {
       this.form.controls['categoryID'].setValue(
         this.data.objProduct.categoryID
       );
-      this.form.controls['talla'].setValue(this.data.objProduct.talla);
       this.form.controls['precio'].setValue(this.data.objProduct.precio);
       this.imageName = this.data.objProduct.imageUrl;
+      !this.data.objProduct.inventario
+        ? this.setDatosDefaultTalla()
+        : this.data.objProduct.inventario.forEach((ta) =>
+            this.objTallas.push(new InventarioModelo(ta))
+          );
     }
+  }
+
+  setDatosDefaultTalla() {
+    this.objTallas.push({ talla: 'xs', inventario: 0 });
+    this.objTallas.push({ talla: 's', inventario: 0 });
+    this.objTallas.push({ talla: 'm', inventario: 0 });
+    this.objTallas.push({ talla: 'l', inventario: 0 });
+    this.objTallas.push({ talla: 'xl', inventario: 0 });
   }
 
   consultaInfo(): void {
@@ -95,7 +123,8 @@ export class ModalProductComponent implements OnInit {
         this.form.getRawValue(),
         this.objImagen.nombreArchivo.length
           ? this.objImagen.nombreArchivo
-          : this.imageName
+          : this.imageName,
+        this.objTallas
       )
       .subscribe(
         (res: any) => {
@@ -113,7 +142,11 @@ export class ModalProductComponent implements OnInit {
 
   createProduct(): void {
     this._ps
-      .createProduct(this.form.getRawValue(), this.objImagen.nombreArchivo)
+      .createProduct(
+        this.form.getRawValue(),
+        this.objImagen.nombreArchivo,
+        this.objTallas
+      )
       .subscribe(
         (res: any) => {
           showNotifySuccess(
@@ -140,9 +173,12 @@ export class ModalProductComponent implements OnInit {
     const files = event.target.files;
     const file = files[0];
     const ext = this.getFileExtension(file.name);
-    if (ext && !(this.extPermitidas.includes(ext))) {
-      showSwalWarning('Formato de archivo no valido', 'Solo se admiten archivos .jpg, .jpeg, .png');
-      this.inputFile.nativeElement.value = "";
+    if (ext && !this.extPermitidas.includes(ext)) {
+      showSwalWarning(
+        'Formato de archivo no valido',
+        'Solo se admiten archivos .jpg, .jpeg, .png'
+      );
+      this.inputFile.nativeElement.value = '';
       return;
     }
     this.objImagen.nombreArchivo = file.name;
@@ -160,12 +196,21 @@ export class ModalProductComponent implements OnInit {
   }
 
   uploadImage() {
-    console.log(this.objImagen);
     this._ps.uploadFile(this.objImagen).subscribe(
       (datos) => {},
       (e) => {
         showNotifyError('Error al subir imagen', 'Intente mas tarde');
       }
     );
+  }
+
+  esInventarioNV(): boolean {
+    let res = false;
+    this.objTallas.forEach((t) => {
+      if (t.inventario < 0) {
+        res = true;
+      }
+    });
+    return res;
   }
 }

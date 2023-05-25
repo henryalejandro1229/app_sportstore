@@ -81,7 +81,7 @@ export class CarritoComponent implements OnInit {
     );
   }
 
-  verProducto(producto: ProductoModelo) {
+  verProducto(producto: ProductoCarritoModelo) {
     this.router.navigate(['/home/list-categories/product-detail'], {
       queryParams: { ID: producto._id.$oid },
     });

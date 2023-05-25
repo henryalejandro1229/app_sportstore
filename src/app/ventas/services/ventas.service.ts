@@ -33,7 +33,8 @@ export class VentasService {
   setProductoCarrito(producto: ProductoCarritoModelo) {
     this.getProductosCarrito();
     let productoEncontrado = this.arrProductos.find(
-      (prod) => prod._id.$oid === producto._id.$oid
+      (prod) =>
+        prod._id.$oid === producto._id.$oid && prod.talla === producto.talla
     );
     if (productoEncontrado) {
       productoEncontrado.cantidad =
@@ -51,7 +52,7 @@ export class VentasService {
 
   setCantidadProductoCarrito(producto: ProductoCarritoModelo) {
     this.arrProductos.forEach((prod) => {
-      if (prod._id.$oid === producto._id.$oid)
+      if (prod._id.$oid === producto._id.$oid && prod.talla === producto.talla)
         prod.existencia = producto.existencia;
     });
     this.calculaSubtotales();
@@ -60,9 +61,15 @@ export class VentasService {
 
   deleteProductoCarrito(producto: ProductoCarritoModelo) {
     this.getProductosCarrito();
-    this.arrProductos = this.arrProductos.filter(
-      (prod) => prod._id.$oid !== producto._id.$oid
-    );
+    const arr = JSON.parse(JSON.stringify(this.arrProductos));
+    arr.forEach((prod: ProductoCarritoModelo, index: number) => {
+      if (
+        prod._id.$oid === producto._id.$oid &&
+        prod.talla === producto.talla
+      ) {
+        this.arrProductos.splice(index, 1);
+      }
+    });
     this.cantProductosCarrito = this.arrProductos.length;
     localStorage.setItem('productosCarrito', JSON.stringify(this.arrProductos));
   }
@@ -80,7 +87,9 @@ export class VentasService {
   }
 
   getDirecciones(clienteID: string): Observable<any> {
-    return this.http.get(`${environment.url}/sales/getDirecciones.php?clienteID=${clienteID}`);
+    return this.http.get(
+      `${environment.url}/sales/getDirecciones.php?clienteID=${clienteID}`
+    );
   }
 
   createdireccion(formData: DireccionModelo): Observable<any> {
@@ -121,15 +130,17 @@ export class VentasService {
   }
 
   createSale(objVenta: AltaCarrito): Observable<any> {
-    let prod : any[] = JSON.parse(JSON.stringify(objVenta.productos));
-    prod = prod.map(p => {
+    let prod: any[] = JSON.parse(JSON.stringify(objVenta.productos));
+    prod = prod.map((p) => {
       delete p._id;
       return p;
     });
 
-    let dir : DireccionModelo = JSON.parse(JSON.stringify(objVenta.direccionEntrega));
+    let dir: DireccionModelo = JSON.parse(
+      JSON.stringify(objVenta.direccionEntrega)
+    );
     delete dir._id;
-    
+
     let params = new HttpParams()
       .append('fechaVenta', String(new Date()))
       .append('total', objVenta.total)
@@ -144,6 +155,8 @@ export class VentasService {
   }
 
   getSales(clienteID: string): Observable<any> {
-    return this.http.get(`${environment.url}/sales/getSales.php?clienteID=${clienteID}`);
+    return this.http.get(
+      `${environment.url}/sales/getSales.php?clienteID=${clienteID}`
+    );
   }
 }

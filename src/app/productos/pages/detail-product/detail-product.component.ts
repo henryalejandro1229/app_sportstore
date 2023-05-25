@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CategoryModelo, ProductoModelo } from '../../models/productos.modelo';
+import {
+  CategoryModelo,
+  InventarioModelo,
+  ProductoModelo,
+} from '../../models/productos.modelo';
 import { ActivatedRoute } from '@angular/router';
 import { ProductosService } from '../../services/productos.service';
 import { combineLatest } from 'rxjs';
@@ -25,6 +29,7 @@ export class DetailProductComponent implements OnInit {
   loading = false;
   category!: string;
   cantidad = 1;
+  objTalla!: InventarioModelo;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -45,12 +50,12 @@ export class DetailProductComponent implements OnInit {
     combineLatest(this._ps.getProduct(id), this._ps.getCategories()).subscribe(
       (res) => {
         this.objProducto = res[0][0];
-        console.log(this.objProducto);
         this.objCategories = res[1];
         let resp = this.objCategories.find(
           (cat) => (cat._id.$oid = this.objProducto.categoryID)
         );
         this.category = resp ? resp.name : '';
+        this.setDatoDefaultTalla(this.objProducto);
         this.loading = false;
       },
       (e) => {
@@ -60,14 +65,29 @@ export class DetailProductComponent implements OnInit {
     );
   }
 
+  private setDatoDefaultTalla(prod: ProductoModelo) {
+    prod.inventario.forEach((i) => {
+      if (i.inventario > 0) {
+        this.objTalla = i;
+      }
+    });
+  }
+
   private setDatoscarrito() {
-    this.objCarritoProducto = new ProductoCarritoModelo(this.objProducto, this.category);
+    this.objCarritoProducto = new ProductoCarritoModelo(
+      this.objProducto,
+      this.category,
+      this.objTalla
+    );
   }
 
   setCantidad(input: any) {
-    if(parseFloat(input.value) > this.objProducto.existencia) {
-      showNotifyWarning('', 'No se puede solicitar más cantidad de la existente');
-      input.value = this.objProducto.existencia;
+    if (parseFloat(input.value) > this.objTalla.inventario) {
+      showNotifyWarning(
+        '',
+        'No se puede solicitar más cantidad de la existente'
+      );
+      input.value = this.objTalla.inventario;
       return;
     }
     if (parseFloat(input.value) <= 0) {

@@ -1,0 +1,11 @@
+.container-image {
+  background-color: #e6e6e6;
+  border-radius: 6px;
+  border: solid #c8c8c8 3px;
+  border-style: dotted;
+  img {
+    height: 400px;
+    width: 100%;
+    object-fit: scale-down;
+  }
+}
