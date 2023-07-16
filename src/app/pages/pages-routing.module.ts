@@ -85,6 +85,11 @@ const routes: Routes = [
               breadcrumb: 'Mis direcciones'
             }
           },
+          {
+            path: 'change-pwd',
+            data: { breadcrumb: 'Cambiar contraseña', tipo: 'Profile'},
+            component: ForgotPwdComponent,
+          },
         ]
       },
       {

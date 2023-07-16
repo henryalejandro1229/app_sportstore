@@ -6,6 +6,7 @@ import {
   showSwalSuccess,
   showSwalWarning,
 } from 'src/app/shared/functions/Utilities';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-pwd',
@@ -15,8 +16,14 @@ import {
 export class ForgotPwdComponent implements OnInit {
   form!: FormGroup;
   loading = false;
+  esPerfil = false;
 
-  constructor(private _ls: LoginService) {}
+  constructor(private _ls: LoginService,
+              private route: ActivatedRoute,) {
+    this.route.data.subscribe(params => {
+      if (params['tipo'] && params['tipo'] === 'Profile') this.esPerfil = true;
+    });
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({

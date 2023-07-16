@@ -28,7 +28,7 @@
             Restablecer
           </button>
         </section>
-        <div class="forgot-psw text-center">
+        <div *ngIf="!esPerfil" class="forgot-psw text-center">
           <a [routerLink]="['/home/login']">Iniciar sesión</a>
         </div>
       </section>
