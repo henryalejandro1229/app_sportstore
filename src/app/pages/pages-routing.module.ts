@@ -12,6 +12,7 @@ import { AvisoPrivacidadComponent } from '../shared/aviso-privacidad/aviso-priva
 import { PedidosComponent } from '../shared/pedidos/pedidos.component';
 import { PreguntasFrecuentesComponent } from '../shared/preguntas-frecuentes/preguntas-frecuentes.component';
 import { ResultadosBusquedaComponent } from '../productos/pages/resultados-busqueda/resultados-busqueda.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -71,6 +72,11 @@ const routes: Routes = [
         path: 'resultados-busqueda',
         data: { breadcrumb: 'Resultados de búsqueda' },
         component: ResultadosBusquedaComponent,
+      },
+      {
+        path: 'profile',
+        data: { breadcrumb: 'Mi perfil' },
+        component: ProfileComponent,
       },
       {
         path: 'list-categories',

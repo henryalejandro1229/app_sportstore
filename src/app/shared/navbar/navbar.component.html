@@ -136,7 +136,7 @@
             alt="Black and White Portrait of a Man" loading="lazy" [matMenuTriggerFor]="matMenuPerfil" />
         </a>
         <mat-menu #matMenuPerfil="matMenu">
-          <button mat-menu-item><mat-icon>account_circle</mat-icon> Mi perfil</button>
+          <button mat-menu-item (click)="routerLink('/home/profile')"><mat-icon>account_circle</mat-icon>Mi perfil</button>
           <button mat-menu-item (click)="logout()"><mat-icon>logout</mat-icon> Cerrar sesión</button>
         </mat-menu>
       </div>
