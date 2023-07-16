@@ -5,6 +5,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
+import { DireccionesComponent } from './direcciones/direcciones.component';
 
 
 
@@ -13,6 +14,7 @@ import { ProfileComponent } from './profile/profile.component';
     MainComponent,
     HomeComponent,
     ProfileComponent,
+    DireccionesComponent,
   ],
   imports: [
     CommonModule,

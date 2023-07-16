@@ -45,7 +45,6 @@ export class NuevaDireccionComponent implements OnInit {
       ]),
       colonia: new FormControl('', [
         Validators.required,
-        Validators.pattern(/^[a-z\s\u00E0-\u00FC\u00f1]*$/i),
       ]),
       calle: new FormControl('', [
         Validators.required,

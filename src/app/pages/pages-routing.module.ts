@@ -13,6 +13,7 @@ import { PedidosComponent } from '../shared/pedidos/pedidos.component';
 import { PreguntasFrecuentesComponent } from '../shared/preguntas-frecuentes/preguntas-frecuentes.component';
 import { ResultadosBusquedaComponent } from '../productos/pages/resultados-busqueda/resultados-busqueda.component';
 import { ProfileComponent } from './profile/profile.component';
+import { DireccionesComponent } from './direcciones/direcciones.component';
 
 const routes: Routes = [
   {
@@ -75,8 +76,16 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        data: { breadcrumb: 'Mi perfil' },
-        component: ProfileComponent,
+        data: {breadcrumb: 'Mi perfil'},
+        children: [
+          {path: '', component: ProfileComponent},
+          {
+            path: 'direcciones', component: DireccionesComponent,
+            data: {
+              breadcrumb: 'Mis direcciones'
+            }
+          },
+        ]
       },
       {
         path: 'list-categories',
