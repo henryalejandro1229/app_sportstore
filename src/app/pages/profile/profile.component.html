@@ -1,9 +1,17 @@
 <div class="container py-4">
     <div class="row">
         <div class="col-md-3">
-            <div class="container-image" matTooltip="Cambiar foto perfil">
-                <img style="cursor: pointer" src="../../../assets/resources/perfilimagen.png">
+            <div class="container-img">
+                <img [src]="profileUrl">
             </div>
+            <button mat-stroked-button (click)="routerLink('/home/profile/change-avatar')" class="k-btn-pry-red form-full mb-2">
+                <mat-icon>edit</mat-icon>
+                Cambiar foto
+            </button>
+            <button mat-stroked-button class="k-btn-pry-dark form-full">
+                <mat-icon>delete</mat-icon>
+                Quitar foto
+            </button>
         </div>
         <div class="col-md-9">
             <p class="h4">
@@ -12,7 +20,7 @@
             <mat-divider></mat-divider>
             <br>
             <p class="h5">Datos de la cuenta</p>
-            <!-- <div class="shadow card card-profile">
+            <div class="shadow card card-profile">
                 <div class="row">
                     <div class="col-md-9 as-center">
                         Correo electrónico: <b>henryalejandro@gmail.com</b>
@@ -25,14 +33,15 @@
                     </div>
                 </div>
             </div>
-            <br> -->
+            <br>
             <div class="shadow card card-profile">
                 <div class="row">
                     <div class="col-md-9 as-center">
-                        Contraseña: <b>hcjkdhsjk</b>
+                        Contraseña
                     </div>
                     <div class="col-md-3">
-                        <button mat-raised-button (click)="routerLink('/home/profile/change-pwd')" class="k-btn-pry-dark form-full">
+                        <button mat-raised-button (click)="routerLink('/home/profile/change-pwd')"
+                            class="k-btn-pry-dark form-full">
                             <mat-icon>edit</mat-icon>
                             Cambiar
                         </button>
@@ -40,13 +49,14 @@
                 </div>
             </div>
             <br>
-            <div class="shadow card card-profile" (click)="routerLink('/home/profile/direcciones')" style="cursor: pointer">
+            <div class="shadow card card-profile" (click)="routerLink('/home/profile/direcciones')"
+                style="cursor: pointer">
                 <div class="d-flex justify-content-between">
                     <div class="as-center">
                         Ir a mis direcciones
                     </div>
                     <div>
-                        <button mat-icon-button >
+                        <button mat-icon-button>
                             <mat-icon>arrow_forward_ios</mat-icon>
                         </button>
                     </div>
@@ -54,12 +64,13 @@
             </div>
             <br>
             <p class="h5">Datos personales</p>
-            <div class="shadow card p-4">
+            <div class="shadow card p-4" *ngIf="objUser">
                 <div class="row">
                     <div class="col-md-6">
                         <mat-form-field class="form-full">
                             <mat-label>Nombre</mat-label>
-                            <input matInput disabled value="HENRY" placeholder="Nombre" type="text" required />
+                            <input matInput disabled placeholder="Nombre" [(ngModel)]="objUser.name" type="text"
+                                required />
                         </mat-form-field>
                     </div>
                     <div class="col-md-6">
@@ -72,12 +83,6 @@
             </div>
             <br>
             <div class="row">
-                <!-- <div class="col-md-6">
-                    <button mat-raised-button class="k-btn-pry-red form-full">
-                        <mat-icon>payment</mat-icon>
-                        Guardar
-                    </button>
-                </div> -->
                 <div class="col-md-4">
                     <button mat-stroked-button class="k-btn-pry-red form-full">
                         <mat-icon>save</mat-icon>

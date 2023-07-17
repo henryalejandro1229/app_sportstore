@@ -14,6 +14,7 @@ import { PreguntasFrecuentesComponent } from '../shared/preguntas-frecuentes/pre
 import { ResultadosBusquedaComponent } from '../productos/pages/resultados-busqueda/resultados-busqueda.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DireccionesComponent } from './direcciones/direcciones.component';
+import { ChangeProfileImgComponent } from './change-profile-img/change-profile-img.component';
 
 const routes: Routes = [
   {
@@ -83,6 +84,12 @@ const routes: Routes = [
             path: 'direcciones', component: DireccionesComponent,
             data: {
               breadcrumb: 'Mis direcciones'
+            }
+          },
+          {
+            path: 'change-avatar', component: ChangeProfileImgComponent,
+            data: {
+              breadcrumb: 'Cambiar foto'
             }
           },
           {
