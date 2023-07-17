@@ -20,7 +20,6 @@ export class ProfileComponent implements OnInit {
     nombreArchivo: '',
     base64textString: '',
   };
-  @ViewChild('div') editor!: ElementRef;
   @ViewChild('inputFile') inputFile!: ElementRef;
   @ViewChild('imagenPrevisualizacion') imagenPrevisualizacion!: ElementRef;
   muestraCargaFoto = false;
@@ -32,10 +31,6 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  // ngAfterViewInit() {
-  //   this.setImg();
-  // }
 
   consultaInfo(id: string): void {
     this._ls.getUsuario(id).subscribe(
@@ -52,15 +47,6 @@ export class ProfileComponent implements OnInit {
   getFileExtension(filename: string) {
     return filename.split('.').pop();
   }
-
-  // setImg() {
-  //   this.editor.nativeElement.innerHTML = '';
-  //   let cropprImg = document.createElement('img');
-  //   cropprImg.style.width = '100%';
-  //   cropprImg.setAttribute('id', 'croppr');
-  //   this.editor.nativeElement.appendChild(cropprImg);
-  //   cropprImg.setAttribute('src', this.profileUrl);
-  // }
 
   seleccionarImagen(event: any) {
     const files = event.target.files;

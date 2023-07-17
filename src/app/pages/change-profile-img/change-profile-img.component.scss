@@ -1,0 +1,19 @@
+.can-div {
+  width: 180px;
+  height: 180px;
+  background-color: #e6e6e6;
+  border-radius: 6px;
+  border: solid #c8c8c8 2px;
+  border-style: dotted;
+}
+
+.container-img {
+  background-color: #e6e6e6;
+  border-radius: 6px;
+  border: solid #c8c8c8 3px;
+  border-style: dotted;
+  margin-bottom: 1rem;
+  img {
+    width: 100%;
+  }
+}
