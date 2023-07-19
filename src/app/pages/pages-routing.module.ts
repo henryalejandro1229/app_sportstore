@@ -15,6 +15,7 @@ import { ResultadosBusquedaComponent } from '../productos/pages/resultados-busqu
 import { ProfileComponent } from './profile/profile.component';
 import { DireccionesComponent } from './direcciones/direcciones.component';
 import { ChangeProfileImgComponent } from './change-profile-img/change-profile-img.component';
+import { TerminosCondicionesComponent } from '../shared/terminos-condiciones/terminos-condiciones.component';
 
 const routes: Routes = [
   {
@@ -62,8 +63,8 @@ const routes: Routes = [
       },
       {
         path: 'terminos-condiciones',
-        data: { breadcrumb: 'Aviso de privacidad' },
-        component: AvisoPrivacidadComponent,
+        data: { breadcrumb: 'Terminos y condiciones' },
+        component: TerminosCondicionesComponent,
       },
       {
         path: 'preguntas-frecuentes',
