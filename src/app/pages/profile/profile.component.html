@@ -8,7 +8,7 @@
                 <mat-icon>edit</mat-icon>
                 Cambiar foto
             </button>
-            <button mat-stroked-button class="k-btn-pry-dark form-full">
+            <button mat-stroked-button *ngIf="existProfileImg" (click)="quitarFoto()" class="k-btn-pry-dark form-full">
                 <mat-icon>delete</mat-icon>
                 Quitar foto
             </button>

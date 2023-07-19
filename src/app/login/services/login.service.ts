@@ -72,6 +72,11 @@ export class LoginService {
     const url = `${environment.url}/users/update_password.php?id=${id}&password=${password}`;
     return this.http.get(url);
   }
+  
+  updateProfile(id: string, profileUrl: string): Observable<any> {
+    const url = `${environment.url}/users/update_profile.php?id=${id}&profileUrl=${profileUrl}`;
+    return this.http.get(url);
+  }
 
   sendValidateEmail(email: string, id: string): Observable<any> {
     let body = {
