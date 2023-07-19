@@ -10,7 +10,7 @@
 
 .login-page {
   width: 100%;
-  height: 120vh;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   @extend .basic-text;
@@ -65,7 +65,7 @@
 
   .card-form {
     padding-top: 30px;
-    height: 450px;
+    height: 480px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -119,6 +119,7 @@
 
 @media (max-width: 768px) {
   .login-page {
+    height: 100vh;
     .login-body {
       flex-direction: column;
       padding-top: 35px !important;

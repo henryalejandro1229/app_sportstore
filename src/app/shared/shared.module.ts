@@ -14,6 +14,7 @@ import { PedidosComponent } from './pedidos/pedidos.component';
 import { PageNoFoundComponent } from './page-no-found/page-no-found.component';
 import { BreadcrumbModule } from 'angular-crumbs';
 import { RouterModule } from '@angular/router';
+import { TerminosCondicionesComponent } from './terminos-condiciones/terminos-condiciones.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { RouterModule } from '@angular/router';
     ModalCerrarSesionComponent,
     PedidosComponent,
     PageNoFoundComponent,
+    TerminosCondicionesComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -46,6 +48,7 @@ import { RouterModule } from '@angular/router';
     AvisoPrivacidadComponent,
     MisionVisionComponent,
     PreguntasFrecuentesComponent,
+    TerminosCondicionesComponent,
     ReactiveFormsModule,
     FormsModule,
     PedidosComponent,

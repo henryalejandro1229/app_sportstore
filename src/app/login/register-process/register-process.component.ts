@@ -30,6 +30,7 @@ export class RegisterProcessComponent implements OnInit {
     private readonly _router: Router
   ) {
     this.form = new FormGroup({
+      terms: new FormControl(null, [Validators.requiredTrue]),
       name: new FormControl('', [Validators.required, Validators.pattern(/^[a-z\s\u00E0-\u00FC\u00f1]*$/i)]),
       password: new FormControl('', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z\d$@$!%*?&].{7,}')]),
       password2: new FormControl('', [Validators.required]),

@@ -61,6 +61,11 @@ const routes: Routes = [
         component: AvisoPrivacidadComponent,
       },
       {
+        path: 'terminos-condiciones',
+        data: { breadcrumb: 'Aviso de privacidad' },
+        component: AvisoPrivacidadComponent,
+      },
+      {
         path: 'preguntas-frecuentes',
         data: { breadcrumb: 'Preguntas frecuentes' },
         component: PreguntasFrecuentesComponent,

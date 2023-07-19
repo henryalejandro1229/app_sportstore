@@ -50,6 +50,7 @@
             <div class="alert alert-danger" role="alert" *ngIf="!pwdsCoinciden && pwdsValue">
               Las contraseñas no coinciden!
             </div>
+            <mat-checkbox formControlName="terms" class="example-margin">Acepto los <a [routerLink]="['/home/terminos-condiciones']" class="link-danger">Términos y condiciones</a></mat-checkbox>
           </section>
           <section class="action">
             <button (click)="register()" class="k-btn-primary k-btn-pry-red" mat-flat-button [disabled]="form.invalid">
