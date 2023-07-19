@@ -7,6 +7,8 @@ import { ImagenModelo } from 'src/app/productos/models/productos.modelo';
 import {
   showModalConfirmation,
   showNotifyError,
+  showNotifySuccess,
+  showNotifyWarning,
   showSwalSuccess,
   showSwalWarning,
 } from 'src/app/shared/functions/Utilities';
@@ -19,12 +21,14 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  esConsulta = true;
   objUser!: ClienteModelo;
   profileUrl = '../../../assets/resources/perfilimagen.png';
   existProfileImg = false;
   @ViewChild('inputFile') inputFile!: ElementRef;
   @ViewChild('imagenPrevisualizacion') imagenPrevisualizacion!: ElementRef;
   muestraCargaFoto = false;
+  token = '';
 
   constructor(
     private router: Router,
@@ -32,21 +36,21 @@ export class ProfileComponent implements OnInit {
     private _auth: AuthService,
     private matDialog: MatDialog
   ) {
-    let token = _auth.getTokenLocalStorage();
-    if (token) this.consultaInfo(token);
+    let id = _auth.getTokenLocalStorage();
+    this.token = id ? id : '';
+    if (this.token) this.consultaInfo();
   }
 
   ngOnInit(): void {}
 
-  consultaInfo(id: string): void {
-    this._ls.getUsuario(id).subscribe(
+  consultaInfo(): void {
+    this._ls.getUsuario(this.token).subscribe(
       (res: ClienteModelo[]) => {
         this.objUser = res[0];
         if (this.objUser.profileUrl) {
           this.profileUrl = `${environment.urlImg}${this.objUser.profileUrl}`;
           this.existProfileImg = true;
         }
-          
       },
       (e) => {
         showNotifyError('Error al consultar información', 'Intente mas tarde');
@@ -79,5 +83,21 @@ export class ProfileComponent implements OnInit {
         );
       }
     });
+  }
+
+  actualizarNombre() {
+    if (this.objUser.name === '') {
+      showNotifyWarning('', 'El campo nombre es obligatorio');
+      return;
+    }
+    const id = this._auth.getTokenLocalStorage();
+    this._ls.updateNames(id ? id : '', this.objUser).subscribe(
+      (res) => {
+        showNotifySuccess('', 'Actualizado exitosamente');
+        this.esConsulta = true;
+        this.consultaInfo();
+      },
+      (e) => showNotifyError('Error al actualizar', 'Intente mas tarde')
+    );
   }
 }

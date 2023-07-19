@@ -37,6 +37,16 @@ export class LoginService {
     });
   }
 
+  updateNames(id: string, formData: ClienteModelo): Observable<any> {
+    let params = new HttpParams()
+      .append('id', id)
+      .append('name', formData.name)
+      .append('lastName', formData.lastName)
+    return this.http.get(`${environment.url}/users/update_names.php`, {
+      params,
+    });
+  }
+
   deleteClient(id: string): Observable<any> {
     return this.http.get(
       `${environment.url}/users/deleteClient.php?id=${id}`
