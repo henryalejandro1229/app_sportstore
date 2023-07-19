@@ -3,12 +3,9 @@
 }
 
 .container-img {
-  background-color: #e6e6e6;
-  border-radius: 6px;
-  border: solid #c8c8c8 3px;
-  border-style: dotted;
   margin-bottom: 1rem;
   img {
+    border-radius: 5px;
     width: 100%;
   }
 }
