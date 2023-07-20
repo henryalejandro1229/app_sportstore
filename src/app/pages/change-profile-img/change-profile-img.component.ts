@@ -69,9 +69,13 @@ export class ChangeProfileImgComponent implements OnInit {
   }
 
   guardar() {
+    if(this.objImagen.base64textString === '') {
+      showNotifyWarning('', 'Cargue una imagen para continuar');
+      return;
+    }
     const base64 = this.base64.nativeElement.value;
     if (!base64 || base64 === '') {
-      showNotifyWarning('', 'Seleccione la sección de imagen');
+      showNotifyWarning('', 'Haga click la sección de imagen a cargar');
       return;
     }
     const arr = base64.split(',');

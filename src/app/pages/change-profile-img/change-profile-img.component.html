@@ -2,14 +2,17 @@
     <div class="row">
         <div class="col-md-8">
             <div id="editor" #div class="mb-2 container-img"></div>
-            <input id="image" (change)="seleccionarImagen($event)" #inputFile type="file" accept="image/*" class="form-control mb-2">
+            <input id="image" (change)="seleccionarImagen($event)" #inputFile type="file" accept="image/*"
+                class="form-control mb-2">
         </div>
         <div class="col-md-4">
-            <div class="d-flex justify-content-center mb-2">
-                <canvas id="preview" class="can-div"></canvas>
+            <div>
+                <div class="d-flex justify-content-center mb-2">
+                    <canvas id="preview" class="can-div"></canvas>
+                </div>
+                <p class="text-center">Previsualización</p>
             </div>
-            <p>Previsualización</p>
-            <button mat-stroked-button (click)="guardar()" class="k-btn-pry-red form-full mb-2">
+            <button *ngIf="objImagen.base64textString !== ''" mat-stroked-button (click)="guardar()" class="k-btn-pry-red form-full mb-2">
                 <mat-icon>save</mat-icon>
                 Confirmar
             </button>
