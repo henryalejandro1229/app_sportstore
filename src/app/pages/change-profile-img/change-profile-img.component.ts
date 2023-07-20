@@ -89,6 +89,7 @@ export class ChangeProfileImgComponent implements OnInit {
     this._ls.updateProfile(id ? id : '', objImagen.nombreArchivo).subscribe(
       (res) => {
         showSwalSuccess('', 'Imagen cargada correctamente');
+        this._auth.profileUrl = `${environment.urlImg}${objImagen.nombreArchivo}`;
         this.navigateProfile();
       },
       (e) => showNotifyError('Error al subir imagen', 'Intente mas tarde')

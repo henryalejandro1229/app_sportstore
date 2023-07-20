@@ -132,7 +132,7 @@
       <div class="dropdown" *ngIf="_auth.isAuth()">
         <a class="dropdown-toggle d-flex align-items-center hidden-arrow" id="navbarDropdownMenuAvatar" role="button"
           data-mdb-toggle="dropdown" aria-expanded="false">
-          <img src="../../../assets/resources/perfilimagen.png" class="rounded-circle" height="35"
+          <img [src]="_auth.profileUrl" class="rounded-circle shadow" height="40"
             alt="Black and White Portrait of a Man" loading="lazy" [matMenuTriggerFor]="matMenuPerfil" />
         </a>
         <mat-menu #matMenuPerfil="matMenu">

@@ -77,6 +77,7 @@ export class ProfileComponent implements OnInit {
           (res) => {
             showSwalSuccess('', 'Imagen retirada exitosamente');
             this.profileUrl = '../../../assets/resources/perfilimagen.png';
+            this._auth.profileUrl = this.profileUrl;
             this.existProfileImg = false;
           },
           (e) => showNotifyError('Error al subir imagen', 'Intente mas tarde')
