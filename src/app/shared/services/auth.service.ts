@@ -7,6 +7,22 @@ export class AuthService {
   token: string = '';
   constructor() {}
 
+  getCookies() {
+    return localStorage.getItem('cookies');
+  }
+
+  setAceptaCookies() {
+    return localStorage.setItem('cookies', 'true');
+  }
+
+  isCookiesAccept(): boolean {
+    let cookie = this.getCookies();
+    if (cookie && cookie?.length > 0) {
+      return true;
+    }
+    return false;
+  }
+
   getTokenLocalStorage() {
     return localStorage.getItem('token') ? localStorage.getItem('token') : '';
   }

@@ -28,6 +28,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MAT_BOTTOM_SHEET_DEFAULT_OPTIONS, MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { NgModule } from '@angular/core';
 // import {MatDatetimepickerModule, MatNativeDatetimeModule} from '@mat-datetimepicker/core';
 // import {MatMomentDatetimeModule} from '@mat-datetimepicker/moment';
@@ -65,6 +66,7 @@ import { NgModule } from '@angular/core';
     MatTreeModule,
     MatSlideToggleModule,
     MatBadgeModule,
+    MatBottomSheetModule,
   ],
   exports: [
     MatAutocompleteModule,
@@ -97,7 +99,11 @@ import { NgModule } from '@angular/core';
     MatTreeModule,
     MatSlideToggleModule,
     MatBadgeModule,
+    MatBottomSheetModule,
   ],
   declarations: [],
+  providers: [
+    {provide: MAT_BOTTOM_SHEET_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+  ]
 })
 export class MaterialModule {}

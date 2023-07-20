@@ -6,6 +6,8 @@ import { showNotifyError } from 'src/app/shared/functions/Utilities';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { combineLatest } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { CookiesPageComponent } from 'src/app/shared/cookies-page/cookies-page.component';
 
 @Component({
   selector: 'app-home',
@@ -20,11 +22,17 @@ export class HomeComponent implements OnInit {
   constructor(
     private readonly _router: Router,
     private _auth: AuthService,
-    private _ps: ProductosService
+    private _ps: ProductosService,
+    private _bottomSheet: MatBottomSheet
   ) {}
 
   ngOnInit(): void {
     this.getCategories();
+    if(!this._auth.isCookiesAccept()) this.openBottomSheet();
+  }
+
+  openBottomSheet(): void {
+    this._bottomSheet.open(CookiesPageComponent);
   }
 
   viewListCategories(categorySex: string): void {
