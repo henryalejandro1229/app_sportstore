@@ -7,7 +7,7 @@ export const environment = {
   production: false,
   url: `app_sportstore_backend/api`,
   urlImg: `http://localhost/app_sportstore_backend/api/products/imageProducts/`,
-  urlEmail: `https://appsportstoreserveremail-production.up.railway.app/app_sportstore_backend`,
+  urlEmail: `https://sportstoreserveremail-414667ee340b.herokuapp.com/app_sportstore_backend`,
 };
 
 /*

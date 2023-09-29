@@ -5,23 +5,29 @@ import { LoginService } from './login/services/login.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'app_sportstore';
-  public readonly VAPID_PUBLIC_KEY = 'BAN5l7dvIHSrQfUEhwYeFeTUPc5mZ8tR2Xv3H2y7-ytI1vXh2hoGlj19PCVS06-1n4SJ8JW2_RTuMovcm6FO2Q8';
+  public readonly VAPID_PUBLIC_KEY =
+    'BAN5l7dvIHSrQfUEhwYeFeTUPc5mZ8tR2Xv3H2y7-ytI1vXh2hoGlj19PCVS06-1n4SJ8JW2_RTuMovcm6FO2Q8';
 
   constructor(private swPush: SwPush, private _ls: LoginService) {
     this.subscribeToNotifications();
   }
 
   subscribeToNotifications(): any {
-    this.swPush.requestSubscription( {
-      serverPublicKey: this.VAPID_PUBLIC_KEY
-    }).then(sub => {
-      const token = JSON.parse(JSON.stringify(sub));
-      this._ls.saveTokenWeb(token).subscribe();
-      console.log(token);
-    }). catch(err => console.log(err));
+    this.swPush
+      .requestSubscription({
+        serverPublicKey: this.VAPID_PUBLIC_KEY,
+      })
+      .then((sub) => {})
+      .catch((err) => console.log(err));
+  }
+
+  sendNotification(): any {
+    this.swPush.subscription.subscribe((res) => {
+      this._ls.sendNotification(res).subscribe();
+    });
   }
 }

@@ -136,11 +136,11 @@ export class LoginService {
     return this.http.get(url);
   }
 
-  saveTokenWeb(token: any) {
+  sendNotification(token: any) {
     let body = {
-      token
+      token: token
     };
-    const url = `${environment.urlEmail}/save-token`;
+    const url = `${environment.urlEmail}/send-push-notification`;
     return this.http.post(url, body);
   }
 }
