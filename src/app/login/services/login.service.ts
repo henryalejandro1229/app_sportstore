@@ -135,4 +135,12 @@ export class LoginService {
     const url = `${environment.url}/mongotools/getRestores.php?`;
     return this.http.get(url);
   }
+
+  saveTokenWeb(token: any) {
+    let body = {
+      token
+    };
+    const url = `${environment.urlEmail}/save-token`;
+    return this.http.post(url, body);
+  }
 }
