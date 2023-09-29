@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
         this.limitaCategoria();
       },
       (e) => {
-        showNotifyError('Error al registrar', 'Intente mas tarde');
+        showNotifyError('Error de conexión', 'Intente mas tarde');
       }
     );
   }

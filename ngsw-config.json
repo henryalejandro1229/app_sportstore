@@ -34,5 +34,20 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "app",
+      "urls": [
+        "https://sportstore.proyectowebuni.com/api/products/getCategoriesPerSex.php?categorySex=man",
+        "https://sportstore.proyectowebuni.com/api/products/getCategoriesPerSex.php?categorySex=woman"
+      ],
+      "cacheConfig": {
+        "maxSize": 10,
+        "maxAge": "50m",
+        "timeout": "10s",
+        "strategy": "freshness"
+      }
+    }
   ]
 }
