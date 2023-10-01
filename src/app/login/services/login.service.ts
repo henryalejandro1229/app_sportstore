@@ -135,12 +135,4 @@ export class LoginService {
     const url = `${environment.url}/mongotools/getRestores.php?`;
     return this.http.get(url);
   }
-
-  sendNotification(token: any) {
-    let body = {
-      token: token
-    };
-    const url = `${environment.urlEmail}/send-push-notification`;
-    return this.http.post(url, body);
-  }
 }

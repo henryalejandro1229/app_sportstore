@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { SwPush } from '@angular/service-worker';
-import { LoginService } from './login/services/login.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +11,7 @@ export class AppComponent {
   public readonly VAPID_PUBLIC_KEY =
     'BAN5l7dvIHSrQfUEhwYeFeTUPc5mZ8tR2Xv3H2y7-ytI1vXh2hoGlj19PCVS06-1n4SJ8JW2_RTuMovcm6FO2Q8';
 
-  constructor(private swPush: SwPush, private _ls: LoginService) {
+  constructor(private swPush: SwPush) {
     this.subscribeToNotifications();
   }
 
@@ -23,11 +22,5 @@ export class AppComponent {
       })
       .then((sub) => {})
       .catch((err) => console.log(err));
-  }
-
-  sendNotification(): any {
-    this.swPush.subscription.subscribe((res) => {
-      this._ls.sendNotification(res).subscribe();
-    });
   }
 }

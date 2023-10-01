@@ -12,6 +12,8 @@ import { showModalConfirmation, showNotifyWarning } from 'src/app/shared/functio
 import { ProductoModelo } from 'src/app/productos/models/productos.modelo';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { NotificationsService } from 'src/app/shared/services/notifications.service';
+import { SwPush } from '@angular/service-worker';
 
 @Component({
   selector: 'app-carrito',
@@ -28,7 +30,9 @@ export class CarritoComponent implements OnInit {
     private _vs: VentasService,
     private fb: FormBuilder,
     private router: Router,
-    private _auth: AuthService
+    private _auth: AuthService,
+    private _ns: NotificationsService,
+    private swPush: SwPush
   ) {
     this.form = new FormGroup({});
     this.Productos = this._vs.arrProductos;
@@ -47,6 +51,12 @@ export class CarritoComponent implements OnInit {
       );
     });
     this.calculaDatosCarrito();
+  }
+
+  ngOnDestroy() {
+    this.swPush.subscription.subscribe((sub) => {
+      this._ns.sendNotification(sub, 'abandono_carrito').subscribe();
+    });
   }
 
   setCantidad(input: any, producto: ProductoCarritoModelo) {
