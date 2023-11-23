@@ -8,7 +8,10 @@ import {
 import { VentasService } from '../../services/ventas.service';
 import { AltaCarrito, ProductoCarritoModelo } from '../../models/ventas.modelo';
 import { environment } from 'src/environments/environment';
-import { showModalConfirmation, showNotifyWarning } from 'src/app/shared/functions/Utilities';
+import {
+  showModalConfirmation,
+  showNotifyWarning,
+} from 'src/app/shared/functions/Utilities';
 import { ProductoModelo } from 'src/app/productos/models/productos.modelo';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -54,9 +57,11 @@ export class CarritoComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.swPush.subscription.subscribe((sub) => {
-      this._ns.sendNotification(sub, 'abandono_carrito').subscribe();
-    });
+    if (this.Productos.length > 0) {
+      this.swPush.subscription.subscribe((sub) => {
+        this._ns.sendNotification(sub, 'abandono_carrito').subscribe();
+      });
+    }
   }
 
   setCantidad(input: any, producto: ProductoCarritoModelo) {
@@ -98,7 +103,7 @@ export class CarritoComponent implements OnInit {
   }
 
   continuarCompra() {
-    if(!this._auth.isAuth()) {
+    if (!this._auth.isAuth()) {
       showModalConfirmation(
         'Iniciar sesión',
         'Para continuar, debe iniciar sesión',

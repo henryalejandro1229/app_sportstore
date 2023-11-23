@@ -20,7 +20,9 @@ export class AppComponent {
       .requestSubscription({
         serverPublicKey: this.VAPID_PUBLIC_KEY,
       })
-      .then((sub) => {})
+      .then((sub) => {
+        console.log(sub);
+      })
       .catch((err) => console.log(err));
   }
 }

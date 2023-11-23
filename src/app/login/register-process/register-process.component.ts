@@ -9,6 +9,8 @@ import {
 } from 'src/app/shared/functions/Utilities';
 import { LoginService } from '../services/login.service';
 import { ClienteModelo } from '../models/cliente.modelo';
+import { SwPush } from '@angular/service-worker';
+import { NotificationsService } from 'src/app/shared/services/notifications.service';
 
 @Component({
   selector: 'app-register-process',
@@ -27,12 +29,22 @@ export class RegisterProcessComponent implements OnInit {
   constructor(
     private activatedRouter: ActivatedRoute,
     private _ls: LoginService,
-    private readonly _router: Router
+    private readonly _router: Router,
+    private swPush: SwPush,
+    private _ns: NotificationsService
   ) {
     this.form = new FormGroup({
       terms: new FormControl(null, [Validators.requiredTrue]),
-      name: new FormControl('', [Validators.required, Validators.pattern(/^[a-z\s\u00E0-\u00FC\u00f1]*$/i)]),
-      password: new FormControl('', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z\d$@$!%*?&].{7,}')]),
+      name: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[a-z\s\u00E0-\u00FC\u00f1]*$/i),
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.pattern(
+          '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-zd$@$!%*?&].{7,}'
+        ),
+      ]),
       password2: new FormControl('', [Validators.required]),
     });
     this.activatedRouter.queryParams.subscribe((param) => {
@@ -77,7 +89,12 @@ export class RegisterProcessComponent implements OnInit {
           (res) => {
             this.loading = false;
             showNotifySuccess('Registro completado', '¡Su cuenta está lista!');
-            this._router.navigate(['/home']);
+            this.swPush.subscription.subscribe((sub) => {
+              this._ns.sendNotification(sub, 'bienvenida').subscribe();
+            });
+            setTimeout(() => {
+              this._router.navigate(['/home']);
+            }, 3000);
           },
           (e) => {
             this.loading = false;
